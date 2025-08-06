@@ -1,0 +1,100 @@
+{
+  "createdAt": "2025-07-30T07:39:20.663Z",
+  "updatedAt": "2025-08-06T05:06:40.000Z",
+  "id": "4ach6cHvn7xwlXYc",
+  "name": "One",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=",
+        "options": {
+          "systemMessage": "=Hello"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -1140,
+        100
+      ],
+      "id": "ba867c41-f240-4b05-bd61-a037eb159378",
+      "name": "Bot",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        100
+      ],
+      "id": "a436111c-446e-483f-a559-57f2331b06a5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        340
+      ],
+      "id": "8a2253d0-2546-4ba8-8f63-83ad3d6bb7fa",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Bot": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Bot",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "6f41d492-da21-44bf-bc53-4660be7ccae3",
+  "triggerCount": 0,
+  "tags": []
+}
