@@ -1,0 +1,213 @@
+{
+  "createdAt": "2025-07-31T13:26:53.247Z",
+  "updatedAt": "2025-08-06T05:07:03.000Z",
+  "id": "PEAvu5cI5A71qBtj",
+  "name": "Prompt Generator",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        -100
+      ],
+      "id": "f2886e14-d165-4110-9e32-a7ae84039215",
+      "name": "When chat message received",
+      "webhookId": "ef3db532-960d-4bda-9043-0c6932399491"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a Prompt Enhancer AI. Your job is to take raw user input (provided as {{ $json.chatInput }}) and convert it into a clear, detailed, and actionable prompt that will produce a high-quality response from the next AI agent.\n\nYour responsibilities:\n\nUnderstand the user's intent, even if it's vague or incomplete.\n\nRewrite the input into a structured and well-formed prompt.\n\nFill in missing but relevant context or details to improve the final output. For example, turn “make me coffee” into “Give proper steps for making a good cup of coffee at home, including ingredients and measurements.”\n\nEnsure clarity, remove ambiguity, and use natural, grammatically correct phrasing.\n\nTailor the prompt to be helpful, complete, and easy for the next AI to interpret.\n\nPreserve the tone and purpose of the original message (e.g., informative, casual, instructional).\n\nOnly output the optimized prompt. Do not include explanations, notes, or any formatting—just return the final improved prompt as plain text."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        40,
+        -100
+      ],
+      "id": "4c7b6bdd-0059-4f74-914f-f470ea021c2f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        120,
+        120
+      ],
+      "id": "0ecbe7a1-9e4f-4da0-821f-14b3d36ca1d8",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "options": {
+          "systemMessage": "You are a clear, efficient AI responder. You receive a well-structured, enhanced prompt and your job is to generate a precise, helpful, and to-the-point response.\n\nYour output must follow these rules:\n\nFocus on what was asked — do not add extra information unless it directly improves usefulness.\n\nAvoid long introductions, history, or fluff — no storytelling, no tangents.\n\nUse bullets, numbered steps, or short paragraphs when appropriate for clarity.\n\nIf the prompt calls for steps or instructions, present them clearly and concisely.\n\nIf the prompt asks a question or seeks an explanation, answer directly in a compact format.\n\nDo not repeat the prompt or restate obvious things.\n\nAssume the user wants efficiency — give them the answer, not a lecture.\n\nYour goal is clarity, precision, and brevity—while still being useful and complete."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -100
+      ],
+      "id": "5df6941c-891c-43b3-9929-9d2f57eb46ff",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        480,
+        120
+      ],
+      "id": "6b50499a-94af-4c69-b611-d2262570c0ab",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    cleanOutput: $json.output\n      .replace(/\\n/g, '<br>')\n      .replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>')\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        60
+      ],
+      "id": "e385eee3-b212-4460-94a8-a3cd91c1ac01",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    cleanOutput: $json.output.replace(/\\\\n/g, '\\n')\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        -160
+      ],
+      "id": "e6b3b5a1-786a-4de5-916f-278b80f44cd4",
+      "name": "Text"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "AI Agent": [
+      {
+        "json": {
+          "output": "Please provide detailed, step-by-step instructions for making a good cup of coffee at home. Include the necessary ingredients, recommended measurements (such as coffee-to-water ratio), essential equipment, and tips for achieving optimal taste."
+        }
+      }
+    ],
+    "AI Agent1": [
+      {
+        "json": {
+          "output": "To make a good cup of coffee at home, follow these steps:\n\n**1. Gather Ingredients & Equipment:**\n*   **Ingredients:**\n    *   Freshly roasted whole coffee beans (light to medium roast recommended)\n    *   Filtered water (soft to medium hardness)\n*   **Essential Equipment:**\n    *   Burr grinder (conical or flat burr)\n    *   Digital kitchen scale (measures grams)\n    *   Kettle (gooseneck for pour-over, electric for convenience)\n    *   Brewing device (e.g., pour-over dripper like Hario V60, AeroPress, French press, automatic drip brewer)\n    *   Timer\n    *   Mug/serving vessel\n\n**2. Measure & Grind Coffee:**\n*   **Ratio:** Use a coffee-to-water ratio of 1:15 to 1:17 (e.g., 1 gram of coffee to 15-17 ml of water). A common starting point is 1:16.\n    *   *Example:* For a 300ml cup, use 18-20 grams of coffee (300ml / 16 = 18.75g).\n*   **Grind:** Grind whole beans just before brewing. Adjust grind size based on your brewing method:\n    *   **Fine:** Espresso, AeroPress (short brew time)\n    *   **Medium-Fine:** Pour-over (V60, Chemex)\n    *   **Medium:** Automatic drip brewers\n    *   **Coarse:** French Press, Cold Brew (long brew time)\n\n**3. Heat Water:**\n*   Heat fresh, filtered water to the optimal brewing temperature: 195°F - 205°F (90°C - 96°C).\n*   For pour-over, a gooseneck kettle provides precise control.\n\n**4. Prepare Your Brewer (Method-Specific):**\n\n*   **Pour-Over (e.g., V60):**\n    1.  Place filter in the dripper.\n    2.  Rinse the filter with hot water to remove paper taste and preheat the brewer. Discard rinse water.\n    3.  Add ground coffee to the filter, gently shaking to level the bed.\n\n*   **French Press:**\n    1.  Preheat the carafe with hot water; discard.\n    2.  Add coarse ground coffee to the bottom.\n\n*   **AeroPress:**\n    1.  Assemble AeroPress according to standard or inverted method.\n    2.  Place filter in cap (if using standard method) and rinse with hot water.\n\n*   **Automatic Drip:**\n    1.  Place filter in the basket.\n    2.  Add ground coffee.\n    3.  Fill water reservoir with fresh, hot water (if your machine doesn't heat well).\n\n**5. Brew Coffee:**\n\n*   **Pour-Over:**\n    1.  **Bloom:** Start timer. Pour just enough hot water (about twice the coffee weight) to saturate the grounds. Let it bloom for 30-45 seconds.\n    2.  **Pour:** Slowly pour the remaining water in concentric circles, avoiding the edges, maintaining an even wet bed. Aim for a total brew time of 2:30 - 3:30 minutes for a typical 300-400ml brew.\n\n*   **French Press:**\n    1.  Pour hot water over grounds, ensuring they are fully saturated. Stir gently.\n    2.  Place plunger lid on top, but do not press down.\n    3.  Steep for 4 minutes.\n    4.  Slowly and steadily press the plunger all the way down. Serve immediately.\n\n*   **AeroPress:**\n    1.  Pour hot water over coffee grounds. Stir gently for 10 seconds.\n    2.  Attach plunger and press down slowly and steadily for 20-30 seconds. This typically produces a concentrate. Dilute with hot water to desired strength.\n\n*   **Automatic Drip:**\n    1.  Start the machine. Let it brew automatically.\n\n**6. Serve & Enjoy:**\n*   Pour immediately into your preheated mug.\n*   Taste, and adjust your grind size, water temperature, or ratio for future brews based on your preference.\n\n**Tips for Optimal Taste:**\n*   **Freshness:** Use freshly roasted beans and grind them just before brewing. Coffee stales quickly after grinding.\n*   **Water Quality:** Use filtered water free of strong odors or tastes. It accounts for 98% of your coffee.\n*   **Consistency:** Use a scale for precise measurements of coffee and water.\n*   **Cleanliness:** Regularly clean your brewing equipment to prevent stale coffee oils from affecting taste."
+        }
+      }
+    ]
+  },
+  "versionId": "7eed715d-148f-4fb8-9e96-65f28c384524",
+  "triggerCount": 0,
+  "tags": []
+}
