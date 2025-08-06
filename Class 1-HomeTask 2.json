@@ -1,0 +1,264 @@
+{
+  "createdAt": "2025-08-05T12:50:58.989Z",
+  "updatedAt": "2025-08-05T15:58:09.000Z",
+  "id": "5cM7DQuEB19LL8ch",
+  "name": "Class 1-HomeTask 2",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8,
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c980ff69-a27e-41e3-bf62-8f049d676b23",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Generate a daily tip or motivational quote.",
+        "options": {
+          "systemMessage": "You are an AI assistant that provides only one short output: either a motivational quote or a daily tip, depending on what you think is more appropriate at the moment.\n\nYour response must be:\n• Short (1–2 sentences max)\n• Relevant to everyday life, mindset, productivity, or personal well-being\n• Easy to read and inspiring\n\nRandomly choose between giving a motivational quote or a helpful daily tip.\n\nDo not include any greetings, explanations, emojis, or extra text — only give the quote or the tip directly."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "e32b6d4b-ea49-40b9-8cd0-1e882093c8ab",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        240,
+        220
+      ],
+      "id": "2fa960a0-0e0c-41dc-983d-d181aabf591c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "mn558637@gmail.com",
+        "subject": "={{ $json['0'] }}",
+        "emailType": "text",
+        "message": "={{ $json['1'] }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": ""
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        980,
+        -80
+      ],
+      "id": "306368c3-ade9-47be-8479-f19a1c3d3879",
+      "name": "Send a message",
+      "webhookId": "4661903a-1675-43a8-bf8d-e2a715155d60",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        540,
+        220
+      ],
+      "id": "6cb4cda1-00c8-475b-b8bc-7b6de9a1ea5a",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "numberOfItems": 2,
+          "separator": "\\n\\n\\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
+      "typeVersion": 1,
+      "position": [
+        720,
+        220
+      ],
+      "id": "65a6cd20-dd4c-4b88-9fcb-6d9fce609cb1",
+      "name": "Item List Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=✅ FINAL SYSTEM PROMPT:\nYou are an AI assistant that formats a motivational quote or daily tip (given as {{ $json.output }}) into a short, professional email message.\n\nYour output must follow this exact plain text format:\n\nA short, catchy subject line — without adding \"Subject:\" or any prefix\n\nExactly three line breaks\n\nA short, motivational email body (2–4 sentences) based on {{ $json.output }}\n\nA signature block:\n\nCopy\nEdit\nRegards,\nMuhammad Abdullah\nn8n\n⚠️ Strict rules:\nDo not include \"Subject:\", \"Title:\", or any similar label before the subject line — just write the subject directly.\n\nDo not include greetings (like \"Hi\", \"Hello\") or sign-offs (like \"Thanks\").\n\nDo not use extra spacing, formatting symbols, markdown, or emojis.\n\nYou must add exactly 3 line breaks after the subject.\nalways end the subject by adding \\n\\n\\n\nOutput must be plain text, strictly following the structure above — nothing more, nothing less.\n\nThis format will be parsed automatically — consistency is critical."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "1c41f5fe-945e-466d-8e38-aae8c9a64c90",
+      "name": "AI Agent1",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "sendTo": "faqeehamaryam22@gmail.com",
+        "subject": "={{ $json['0'] }}",
+        "emailType": "text",
+        "message": "={{ $json['1'] }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": ""
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        980,
+        140
+      ],
+      "id": "6b275ae4-8497-45b7-9d97-46e921ce8420",
+      "name": "Send a message1",
+      "webhookId": "4661903a-1675-43a8-bf8d-e2a715155d60",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item List Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "f2146d25-6937-402f-814a-08c44420ef5c",
+  "triggerCount": 1,
+  "tags": []
+}
