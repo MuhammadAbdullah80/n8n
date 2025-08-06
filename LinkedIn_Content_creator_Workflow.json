@@ -1,15 +1,20 @@
 {
-  "name": "LinkedIn Content creator Workflow",
+  "createdAt": "2025-07-29T19:24:57.393Z",
+  "updatedAt": "2025-08-06T05:17:20.000Z",
+  "id": "9hskFLaVEU8ndFPM",
+  "name": "LinkedIn_Content_creator_Workflow",
+  "active": false,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -40,
-        20
+        -780,
+        160
       ],
-      "id": "283139db-d483-4ac1-a99c-30b7bb162158",
+      "id": "1e8c0719-6c51-4803-9199-a422d098ed8b",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -43,14 +48,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        160,
-        20
+        -580,
+        160
       ],
-      "id": "8095e7da-b974-4d50-80c7-426d39978e3a",
+      "id": "6faba518-6ae4-4f04-9bb7-88954cb90e31",
       "name": "Get row(s) in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "ovNEOs3tPDTKTp3H",
+          "id": "EhAt2j9QvRbOZG2y",
           "name": "Google Sheets account"
         }
       }
@@ -76,10 +81,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        460,
-        -80
+        -280,
+        60
       ],
-      "id": "c828f6e1-dc04-4c76-b72a-f5225e2a2016",
+      "id": "9627693c-d6b4-4a96-9361-92096ae00a48",
       "name": "HTTP Request"
     },
     {
@@ -93,10 +98,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        740,
-        -140
+        0,
+        0
       ],
-      "id": "ac93cde0-a54c-4ca6-b269-a3ac2b4075d5",
+      "id": "9e19397d-4ef2-47ec-ba23-fbb68b78207d",
       "name": "AI Agent"
     },
     {
@@ -164,40 +169,38 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        1320,
-        -40
+        580,
+        100
       ],
-      "id": "c5a60040-2efa-4523-9cba-f78b4044dbe4",
+      "id": "2c13c84b-9534-4364-ab4f-c0b4d1def1bf",
       "name": "Append or update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "ovNEOs3tPDTKTp3H",
+          "id": "EhAt2j9QvRbOZG2y",
           "name": "Google Sheets account"
         }
       }
     },
     {
       "parameters": {
-        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        680,
-        120
+        -60,
+        260
       ],
-      "id": "fe9a1924-da2f-4802-b86f-a26f08674a64",
+      "id": "7618a3b2-5d47-42c7-a4ac-4a49baad2908",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     }
   ],
-  "pinData": {},
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -253,22 +256,17 @@
           }
         ]
       ]
-    },
-    "Append or update row in sheet": {
-      "main": [
-        []
-      ]
     }
   },
-  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "93df9499-19d4-4a73-982e-faf773444dd3",
+  "staticData": null,
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "510fe6203072535093bb2ab3dd1e4cf8176cc90da3bee7f259f9edc18a9c8dd7"
+    "templateCredsSetupCompleted": true
   },
-  "id": "CGVizMWOfmcDmVAk",
+  "pinData": {},
+  "versionId": "14026306-7515-41b7-b8df-5e2bbbbf31e8",
+  "triggerCount": 0,
   "tags": []
 }
