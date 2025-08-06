@@ -1,5 +1,10 @@
 {
-  "name": "RAG Pipeline and Chatbot",
+  "createdAt": "2025-07-29T19:25:01.827Z",
+  "updatedAt": "2025-08-06T05:13:14.000Z",
+  "id": "cIcFd2pLa8xq74jf",
+  "name": "RAG_Pipeline_and_Chatbot",
+  "active": false,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -18,23 +23,21 @@
           "cachedResultName": "FAQ",
           "cachedResultUrl": "https://drive.google.com/drive/folders/19X3dVxhV9ql1zTSNmqbU_OdHat_0Rytz"
         },
-        "event": "fileCreated",
-        "options": {
-          "fileType": "all"
-        }
+        "event": "fileUpdated",
+        "options": {}
       },
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
       "position": [
         0,
-        1.765625
+        0
       ],
-      "id": "061cea4e-5275-42c2-bd9e-a8a12e777ed2",
+      "id": "14d34f70-748a-4b28-b89a-d35103d50d9a",
       "name": "Google Drive Trigger",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "rEicnRUKmejzGbPZ",
-          "name": "abdullahk808080808@gmail.com"
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
         }
       }
     },
@@ -54,12 +57,12 @@
         180,
         140
       ],
-      "id": "850ae84c-e118-4a45-8747-254522c04957",
+      "id": "c45ce240-e6b2-40b1-92b0-fe7d3b4c9113",
       "name": "Download file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "rEicnRUKmejzGbPZ",
-          "name": "abdullahk808080808@gmail.com"
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
         }
       }
     },
@@ -82,11 +85,11 @@
         400,
         140
       ],
-      "id": "50c944ab-980d-4d1b-8fcb-962c56dcdf8f",
+      "id": "cb0fb82e-e43a-454e-b63d-b73650de0dad",
       "name": "Pinecone Vector Store",
       "credentials": {
         "pineconeApi": {
-          "id": "X8LrJvQ5votFP4Um",
+          "id": "V03abXRgsqiHEBqm",
           "name": "PineconeApi account"
         }
       }
@@ -103,7 +106,7 @@
         560,
         320
       ],
-      "id": "b5fdf514-2ecb-49a9-8b72-440a7e31059e",
+      "id": "c501094e-d515-498e-880e-d47d09b6a429",
       "name": "Default Data Loader"
     },
     {
@@ -116,7 +119,7 @@
         580,
         500
       ],
-      "id": "9ead7d58-e252-4e04-accc-b467325b5e33",
+      "id": "34500b5c-a129-4e34-8e33-7b92626fe1d3",
       "name": "Recursive Character Text Splitter"
     },
     {
@@ -129,7 +132,7 @@
         1100,
         160
       ],
-      "id": "bbb76130-b3cb-4f7c-9c98-1f38f0634fc3",
+      "id": "70044952-4393-4ae0-a7f4-e07fd5307e9c",
       "name": "AI Agent"
     },
     {
@@ -142,7 +145,7 @@
         860,
         180
       ],
-      "id": "a1f98e9b-baa5-41b8-94ca-dc58e8fd116e",
+      "id": "6501f3e7-7fb1-4a78-88ca-180420de2325",
       "name": "When chat message received",
       "webhookId": "68231bec-b381-440a-b497-36e9f335212f"
     },
@@ -166,50 +169,46 @@
         1240,
         400
       ],
-      "id": "9bc5cf3d-886c-4bc6-9b62-2e36cc4b2d06",
+      "id": "91595913-6588-47ea-bd8d-42bce9bcccfb",
       "name": "Pinecone Vector Store1",
       "credentials": {
         "pineconeApi": {
-          "id": "X8LrJvQ5votFP4Um",
+          "id": "V03abXRgsqiHEBqm",
           "name": "PineconeApi account"
         }
       }
     },
     {
-      "parameters": {
-        "modelName": "models/text-embedding-004"
-      },
+      "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
         460,
         360
       ],
-      "id": "32eda9ee-2319-4621-866f-90a19b013d67",
+      "id": "d82297d1-63e0-4388-b382-d58b9124a316",
       "name": "Embeddings Google Gemini",
       "credentials": {
         "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     },
     {
-      "parameters": {
-        "modelName": "models/text-embedding-004"
-      },
+      "parameters": {},
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
         1280,
         560
       ],
-      "id": "990109a6-e56f-481a-b8c1-97d3d49dca53",
+      "id": "f3324141-88a6-466c-bb8e-ce3506b722f3",
       "name": "Embeddings Google Gemini1",
       "credentials": {
         "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     },
@@ -224,17 +223,16 @@
         1140,
         380
       ],
-      "id": "29978b23-cc56-486d-b8dc-16230a0f9008",
+      "id": "fb120dbe-6639-4fe3-b258-655ac78ad260",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     }
   ],
-  "pinData": {},
   "connections": {
     "Google Drive Trigger": {
       "main": [
@@ -336,15 +334,282 @@
       ]
     }
   },
-  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "7047c186-987a-4b3b-9585-921fe9656990",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "510fe6203072535093bb2ab3dd1e4cf8176cc90da3bee7f259f9edc18a9c8dd7"
+  "staticData": {
+    "node:Google Drive Trigger": {
+      "lastTimeChecked": "2025-08-05T17:11:20Z"
+    }
   },
-  "id": "ye3wHIoJhwJd0qv4",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Google Drive Trigger": [
+      {
+        "json": {
+          "parents": [
+            "19X3dVxhV9ql1zTSNmqbU_OdHat_0Rytz"
+          ],
+          "lastModifyingUser": {
+            "displayName": "Abdullah Kamran",
+            "kind": "drive#user",
+            "me": true,
+            "permissionId": "03231910324326723326",
+            "emailAddress": "abdullahk80808080@gmail.com",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjWkkcBKwrRym9EwGYEDXToqhfsgNnfODXl6wKAXxSN1i4Uo_ionRvpCl3cgCbEfFkApLaKGw12JM_aflPFSlQjlusmvUkL2KhoJWlLmZXc7UtXAzBxAzJLXF97uDPxj0xZYi3OqrIeTQEPzxBPi9UFixa2Yg80BSEaBEU8Hy5vaLs0BL6ElSLeoFi7RoyfMDYEyjJxShZ2_vYQB-Mmuj269a8Xsm8YI9G7912vtlnBPnUOWtiY1SozvZEBBskr2WFQCy1ilee8rm5EiVfuJ1_VmqMXwReghKczn-vhZNLlToJ6fAP17a1fqHtFSKB1FhgQXIhuOHCUtZ_V3jaq5_StdQNVpp6I2jnaQS5JnjYD6tgcf3ahg0IOu3_zAzpkCTZ7Y7FzdHwoxsUy7iWzL_zG5h2uyg9xC-nx5paLin8mRsEqD9oRss8uxoFP5hZlfYXxto6QLb54jHLHxsh-3KMTGVNxRWboWr46Vb_B3TaamknS7-WxVaKyyKn0JtKmaY1VAjX4BZtF3t4TGbKQl1yIZlJAxilSs0L-468xQoy1_YPPhmpOwdCVIY6Snd0ENF75v0MWvQaXFNy0ZqvXMsxT5lKhgKfdPnkVYQ5ksRsyJRhElsoMqwugSysCFF0r_SyjDdS0BukZZhhaosc85cVrBndfyY49THlwXN6g9ILKclCKU5V7ptoxt0yx3yOKU1BXq3x5oPDZdDWfcrzJzOWBPKIlnHYEvslewR9H_Po9HPHBO-NGT1bqoJ4_cGQnrafVRZ4f16zpuQt2BVM2vMeL3YjNDIPRq6Pp1xeQyhkSrEuwW7ObEtw0k6h-B9erIhdRlkybk07Bphy8_5G6e6ZJtFpeUQXi6hbDxkXYJub93OUvr2xKGj1us6_FTy3F8-bKYRbin3iFU0rVe8PN4TwvNx1LBRcgFWWQFJNhjzbcDeiyQV9EincsuyylxQcxDJGXv0z3Ch3nyyB2T2HhumJJIzZBctP-eHg=s64"
+          },
+          "owners": [
+            {
+              "displayName": "Abdullah Kamran",
+              "kind": "drive#user",
+              "me": true,
+              "permissionId": "03231910324326723326",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjWkkcBKwrRym9EwGYEDXToqhfsgNnfODXl6wKAXxSN1i4Uo_ionRvpCl3cgCbEfFkApLaKGw12JM_aflPFSlQjlusmvUkL2KhoJWlLmZXc7UtXAzBxAzJLXF97uDPxj0xZYi3OqrIeTQEPzxBPi9UFixa2Yg80BSEaBEU8Hy5vaLs0BL6ElSLeoFi7RoyfMDYEyjJxShZ2_vYQB-Mmuj269a8Xsm8YI9G7912vtlnBPnUOWtiY1SozvZEBBskr2WFQCy1ilee8rm5EiVfuJ1_VmqMXwReghKczn-vhZNLlToJ6fAP17a1fqHtFSKB1FhgQXIhuOHCUtZ_V3jaq5_StdQNVpp6I2jnaQS5JnjYD6tgcf3ahg0IOu3_zAzpkCTZ7Y7FzdHwoxsUy7iWzL_zG5h2uyg9xC-nx5paLin8mRsEqD9oRss8uxoFP5hZlfYXxto6QLb54jHLHxsh-3KMTGVNxRWboWr46Vb_B3TaamknS7-WxVaKyyKn0JtKmaY1VAjX4BZtF3t4TGbKQl1yIZlJAxilSs0L-468xQoy1_YPPhmpOwdCVIY6Snd0ENF75v0MWvQaXFNy0ZqvXMsxT5lKhgKfdPnkVYQ5ksRsyJRhElsoMqwugSysCFF0r_SyjDdS0BukZZhhaosc85cVrBndfyY49THlwXN6g9ILKclCKU5V7ptoxt0yx3yOKU1BXq3x5oPDZdDWfcrzJzOWBPKIlnHYEvslewR9H_Po9HPHBO-NGT1bqoJ4_cGQnrafVRZ4f16zpuQt2BVM2vMeL3YjNDIPRq6Pp1xeQyhkSrEuwW7ObEtw0k6h-B9erIhdRlkybk07Bphy8_5G6e6ZJtFpeUQXi6hbDxkXYJub93OUvr2xKGj1us6_FTy3F8-bKYRbin3iFU0rVe8PN4TwvNx1LBRcgFWWQFJNhjzbcDeiyQV9EincsuyylxQcxDJGXv0z3Ch3nyyB2T2HhumJJIzZBctP-eHg=s64"
+            }
+          ],
+          "permissions": [
+            {
+              "kind": "drive#permission",
+              "id": "03231910324326723326",
+              "type": "user",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "role": "owner",
+              "displayName": "Abdullah Kamran",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjVFrDptNov719aIE_O9NNLyzBRjAV-9c4tQf2yL5IO2Fpd_KcMmSWa6vCV8IJQ_WYku2fhl_3QkdvOfADKD0EYxGtvvJYfh87UXMVMoEJyvAmUfVw_HIA0MLZwx6hJ8-aCZ2g9lZuXHnm6tAZT2U0L48xRzxLY73izL-dm0hdbEb8Rdi8XGHSrMf0JdcnWPmsnUfk-u_MnaR0vkydJKzwJann1zQEdJ6FzhIwLdyaHZgPyYkg69dpMf9XvLeWQ3oIQ46l6T6O0ldoEtxMp85bqFZ43rQyxejCBAE3OB10_fdOQJvjsIwU9sRsrkPSEfpleG56W-ijYnIRaVGaqLkThv-f-myYBC1TrYp0mPwfDgkkGUrqe2vPXSC94QMU4ICxOKGHi9EesKF56lIv_WmQAldS7ka4UkOUoPbiHx-C2yvp_Yre7vpRDYDF0N4aD8BUwur2ZPqwukKm1S3tcpWi1TDCNk5woIUyst99MKKTPq4zBAcWkbwPolXc0lVojrU9w0JnQo3T_8oLUQKf4WwILyi3EdqCLBHqRyDyLndGbjqCCOMg9NaZfSbv_uJm6BkreR1SfRhB_nzV6lbIZVAi6VN9s9sqHJ58DNFj_2X5HhXSeJuhYGh4FbyuGoi3HScDDfqUp8YB2UHOZmx5rcXwNtjOWNuz5M9mbTPIghWyQzkxiC7C6cnM58J3MutOpQ710MLFQb9hc8Jn-wiovVLu7mJy-ulDiOJSoPQXNLH7sLKHHOU49ve-zHLNZPcgSRMFwUF7VsDg4U-uztSG3FXmivBiqY7jI1NBLzHdGCGUDVQdRcgfeQDXbuWyAx8Va5sTo4cqeEgrKndkIwNrY_kC0voEmg7Dqx3hXJnUgl5HRbM9n9GeC__EXlK9cJgfB0jkGemzIGXxHS6XucU_2IzVvk0TTnFbAtAaBIEwLP5ioXAmBO2Oc_olCqCPgy69MeWTAJkUdLtkrG9ink9yGkh0WTH5i9lwasJA=s64",
+              "deleted": false,
+              "pendingOwner": false
+            }
+          ],
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAcceptOwnership": false,
+            "canAddChildren": false,
+            "canAddMyDriveParent": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRemoveMyDriveParent": true,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "03231910324326723326"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3",
+          "name": "🌿 UrbanNest.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3&export=download",
+          "webViewLink": "https://drive.google.com/file/d/1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBN8qoLsXLs54xD7RbmF8qBDqQLTs4gP8PEeb4vXvDrfJkSDNlPRK2XLcPILqR91jlZvXw2uq1taGC8uQyZGx85fLg2PDv6OqeDrQHQ9tWNu22Y=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": true,
+          "viewedByMeTime": "2025-07-29T19:32:17.263Z",
+          "createdTime": "2025-07-29T19:32:17.263Z",
+          "modifiedTime": "2025-06-30T04:32:25.000Z",
+          "modifiedByMeTime": "2025-06-30T04:32:25.000Z",
+          "modifiedByMe": true,
+          "shared": false,
+          "ownedByMe": true,
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "writersCanShare": true,
+          "originalFilename": "🌿 UrbanNest.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "506c4581da7586773c338ef14d54ba76",
+          "sha1Checksum": "9ed2b3d7643b087f26ce2a5fe1d6a5bd310fd41c",
+          "sha256Checksum": "146c657a58607e9cedb7cff4d5c0b05cfd845f0386c4fef50df572ce954ab0f8",
+          "size": "3920885",
+          "quotaBytesUsed": "3920885",
+          "headRevisionId": "0B9hadl0PtyJsWmFGcUh4bWdLa3BJcDlxSll5eVlUQVpiMFk4PQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      }
+    ],
+    "Download file": [
+      {
+        "json": {
+          "parents": [
+            "19X3dVxhV9ql1zTSNmqbU_OdHat_0Rytz"
+          ],
+          "lastModifyingUser": {
+            "displayName": "Abdullah Kamran",
+            "kind": "drive#user",
+            "me": true,
+            "permissionId": "03231910324326723326",
+            "emailAddress": "abdullahk80808080@gmail.com",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjWkkcBKwrRym9EwGYEDXToqhfsgNnfODXl6wKAXxSN1i4Uo_ionRvpCl3cgCbEfFkApLaKGw12JM_aflPFSlQjlusmvUkL2KhoJWlLmZXc7UtXAzBxAzJLXF97uDPxj0xZYi3OqrIeTQEPzxBPi9UFixa2Yg80BSEaBEU8Hy5vaLs0BL6ElSLeoFi7RoyfMDYEyjJxShZ2_vYQB-Mmuj269a8Xsm8YI9G7912vtlnBPnUOWtiY1SozvZEBBskr2WFQCy1ilee8rm5EiVfuJ1_VmqMXwReghKczn-vhZNLlToJ6fAP17a1fqHtFSKB1FhgQXIhuOHCUtZ_V3jaq5_StdQNVpp6I2jnaQS5JnjYD6tgcf3ahg0IOu3_zAzpkCTZ7Y7FzdHwoxsUy7iWzL_zG5h2uyg9xC-nx5paLin8mRsEqD9oRss8uxoFP5hZlfYXxto6QLb54jHLHxsh-3KMTGVNxRWboWr46Vb_B3TaamknS7-WxVaKyyKn0JtKmaY1VAjX4BZtF3t4TGbKQl1yIZlJAxilSs0L-468xQoy1_YPPhmpOwdCVIY6Snd0ENF75v0MWvQaXFNy0ZqvXMsxT5lKhgKfdPnkVYQ5ksRsyJRhElsoMqwugSysCFF0r_SyjDdS0BukZZhhaosc85cVrBndfyY49THlwXN6g9ILKclCKU5V7ptoxt0yx3yOKU1BXq3x5oPDZdDWfcrzJzOWBPKIlnHYEvslewR9H_Po9HPHBO-NGT1bqoJ4_cGQnrafVRZ4f16zpuQt2BVM2vMeL3YjNDIPRq6Pp1xeQyhkSrEuwW7ObEtw0k6h-B9erIhdRlkybk07Bphy8_5G6e6ZJtFpeUQXi6hbDxkXYJub93OUvr2xKGj1us6_FTy3F8-bKYRbin3iFU0rVe8PN4TwvNx1LBRcgFWWQFJNhjzbcDeiyQV9EincsuyylxQcxDJGXv0z3Ch3nyyB2T2HhumJJIzZBctP-eHg=s64"
+          },
+          "owners": [
+            {
+              "displayName": "Abdullah Kamran",
+              "kind": "drive#user",
+              "me": true,
+              "permissionId": "03231910324326723326",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjWkkcBKwrRym9EwGYEDXToqhfsgNnfODXl6wKAXxSN1i4Uo_ionRvpCl3cgCbEfFkApLaKGw12JM_aflPFSlQjlusmvUkL2KhoJWlLmZXc7UtXAzBxAzJLXF97uDPxj0xZYi3OqrIeTQEPzxBPi9UFixa2Yg80BSEaBEU8Hy5vaLs0BL6ElSLeoFi7RoyfMDYEyjJxShZ2_vYQB-Mmuj269a8Xsm8YI9G7912vtlnBPnUOWtiY1SozvZEBBskr2WFQCy1ilee8rm5EiVfuJ1_VmqMXwReghKczn-vhZNLlToJ6fAP17a1fqHtFSKB1FhgQXIhuOHCUtZ_V3jaq5_StdQNVpp6I2jnaQS5JnjYD6tgcf3ahg0IOu3_zAzpkCTZ7Y7FzdHwoxsUy7iWzL_zG5h2uyg9xC-nx5paLin8mRsEqD9oRss8uxoFP5hZlfYXxto6QLb54jHLHxsh-3KMTGVNxRWboWr46Vb_B3TaamknS7-WxVaKyyKn0JtKmaY1VAjX4BZtF3t4TGbKQl1yIZlJAxilSs0L-468xQoy1_YPPhmpOwdCVIY6Snd0ENF75v0MWvQaXFNy0ZqvXMsxT5lKhgKfdPnkVYQ5ksRsyJRhElsoMqwugSysCFF0r_SyjDdS0BukZZhhaosc85cVrBndfyY49THlwXN6g9ILKclCKU5V7ptoxt0yx3yOKU1BXq3x5oPDZdDWfcrzJzOWBPKIlnHYEvslewR9H_Po9HPHBO-NGT1bqoJ4_cGQnrafVRZ4f16zpuQt2BVM2vMeL3YjNDIPRq6Pp1xeQyhkSrEuwW7ObEtw0k6h-B9erIhdRlkybk07Bphy8_5G6e6ZJtFpeUQXi6hbDxkXYJub93OUvr2xKGj1us6_FTy3F8-bKYRbin3iFU0rVe8PN4TwvNx1LBRcgFWWQFJNhjzbcDeiyQV9EincsuyylxQcxDJGXv0z3Ch3nyyB2T2HhumJJIzZBctP-eHg=s64"
+            }
+          ],
+          "permissions": [
+            {
+              "kind": "drive#permission",
+              "id": "03231910324326723326",
+              "type": "user",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "role": "owner",
+              "displayName": "Abdullah Kamran",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjVFrDptNov719aIE_O9NNLyzBRjAV-9c4tQf2yL5IO2Fpd_KcMmSWa6vCV8IJQ_WYku2fhl_3QkdvOfADKD0EYxGtvvJYfh87UXMVMoEJyvAmUfVw_HIA0MLZwx6hJ8-aCZ2g9lZuXHnm6tAZT2U0L48xRzxLY73izL-dm0hdbEb8Rdi8XGHSrMf0JdcnWPmsnUfk-u_MnaR0vkydJKzwJann1zQEdJ6FzhIwLdyaHZgPyYkg69dpMf9XvLeWQ3oIQ46l6T6O0ldoEtxMp85bqFZ43rQyxejCBAE3OB10_fdOQJvjsIwU9sRsrkPSEfpleG56W-ijYnIRaVGaqLkThv-f-myYBC1TrYp0mPwfDgkkGUrqe2vPXSC94QMU4ICxOKGHi9EesKF56lIv_WmQAldS7ka4UkOUoPbiHx-C2yvp_Yre7vpRDYDF0N4aD8BUwur2ZPqwukKm1S3tcpWi1TDCNk5woIUyst99MKKTPq4zBAcWkbwPolXc0lVojrU9w0JnQo3T_8oLUQKf4WwILyi3EdqCLBHqRyDyLndGbjqCCOMg9NaZfSbv_uJm6BkreR1SfRhB_nzV6lbIZVAi6VN9s9sqHJ58DNFj_2X5HhXSeJuhYGh4FbyuGoi3HScDDfqUp8YB2UHOZmx5rcXwNtjOWNuz5M9mbTPIghWyQzkxiC7C6cnM58J3MutOpQ710MLFQb9hc8Jn-wiovVLu7mJy-ulDiOJSoPQXNLH7sLKHHOU49ve-zHLNZPcgSRMFwUF7VsDg4U-uztSG3FXmivBiqY7jI1NBLzHdGCGUDVQdRcgfeQDXbuWyAx8Va5sTo4cqeEgrKndkIwNrY_kC0voEmg7Dqx3hXJnUgl5HRbM9n9GeC__EXlK9cJgfB0jkGemzIGXxHS6XucU_2IzVvk0TTnFbAtAaBIEwLP5ioXAmBO2Oc_olCqCPgy69MeWTAJkUdLtkrG9ink9yGkh0WTH5i9lwasJA=s64",
+              "deleted": false,
+              "pendingOwner": false
+            }
+          ],
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAcceptOwnership": false,
+            "canAddChildren": false,
+            "canAddMyDriveParent": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRemoveMyDriveParent": true,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "03231910324326723326"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3",
+          "name": "🌿 UrbanNest.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "3",
+          "webContentLink": "https://drive.google.com/uc?id=1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3&export=download",
+          "webViewLink": "https://drive.google.com/file/d/1Wau2SxaPuAOWiM_jsnz5JyDRSeWcehg3/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBN8qoLsXLs54xD7RbmF8qBDqQLTs4gP8PEeb4vXvDrfJkSDNlPRK2XLcPILqR91jlZvXw2uq1taGC8uQyZGx85fLg2PDv6OqeDrQHQ9tWNu22Y=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": true,
+          "viewedByMeTime": "2025-07-29T19:32:17.263Z",
+          "createdTime": "2025-07-29T19:32:17.263Z",
+          "modifiedTime": "2025-06-30T04:32:25.000Z",
+          "modifiedByMeTime": "2025-06-30T04:32:25.000Z",
+          "modifiedByMe": true,
+          "shared": false,
+          "ownedByMe": true,
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "writersCanShare": true,
+          "originalFilename": "🌿 UrbanNest.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "506c4581da7586773c338ef14d54ba76",
+          "sha1Checksum": "9ed2b3d7643b087f26ce2a5fe1d6a5bd310fd41c",
+          "sha256Checksum": "146c657a58607e9cedb7cff4d5c0b05cfd845f0386c4fef50df572ce954ab0f8",
+          "size": "3920885",
+          "quotaBytesUsed": "3920885",
+          "headRevisionId": "0B9hadl0PtyJsWmFGcUh4bWdLa3BJcDlxSll5eVlUQVpiMFk4PQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      }
+    ]
+  },
+  "versionId": "10f5ad51-e3de-49f0-a9eb-a5d3d4c55e34",
+  "triggerCount": 2,
   "tags": []
 }
