@@ -1,0 +1,38 @@
+{
+  "createdAt": "2025-07-30T07:40:56.220Z",
+  "updatedAt": "2025-08-06T05:06:30.000Z",
+  "id": "jQn87oBhkurM6rpx",
+  "name": "Whatsapp",
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        60
+      ],
+      "id": "cb93a52d-3c78-42f5-8c5b-5d83835570ea",
+      "name": "Webhook",
+      "webhookId": "1f16066a-ddff-4758-9d0c-38675b5a785b"
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "66dc6435-cf33-41cf-86cc-8f4448cd0ef2",
+  "triggerCount": 0,
+  "tags": []
+}
