@@ -1,5 +1,10 @@
 {
-  "name": "Invoice Workflow",
+  "createdAt": "2025-08-05T16:04:28.248Z",
+  "updatedAt": "2025-08-05T17:11:01.000Z",
+  "id": "ycNXcR7UddmRZ1KI",
+  "name": "Invoice_Workflow",
+  "active": false,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -24,17 +29,11 @@
       "type": "n8n-nodes-base.googleDriveTrigger",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        -1340,
+        20
       ],
-      "id": "041a8321-1c2e-435d-973d-b55c08d03af0",
-      "name": "Google Drive Trigger",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "rEicnRUKmejzGbPZ",
-          "name": "abdullahk808080808@gmail.com"
-        }
-      }
+      "id": "cdf64bb0-5e57-49c0-9108-1150580dabb1",
+      "name": "Google Drive Trigger"
     },
     {
       "parameters": {
@@ -44,10 +43,10 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        480,
-        0
+        -860,
+        20
       ],
-      "id": "a41fcb70-2f25-4817-916b-ae6a869f72d2",
+      "id": "afc1c949-4977-4c72-bbcd-a0186ba611ca",
       "name": "Extract from File"
     },
     {
@@ -63,15 +62,15 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        220,
-        0
+        -1120,
+        20
       ],
-      "id": "fe013ad1-c34c-4a63-b2e5-821d887b9bfa",
+      "id": "842950be-f477-405c-8bd3-138cfbf04574",
       "name": "Download file",
       "credentials": {
         "googleDriveOAuth2Api": {
-          "id": "rEicnRUKmejzGbPZ",
-          "name": "abdullahk808080808@gmail.com"
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
         }
       }
     },
@@ -129,10 +128,10 @@
       "type": "@n8n/n8n-nodes-langchain.informationExtractor",
       "typeVersion": 1.2,
       "position": [
-        700,
-        20
+        -640,
+        40
       ],
-      "id": "f978c77e-9c2b-461a-91eb-f84e96f7bde7",
+      "id": "9e9d25c9-b5fd-474e-bdf5-ab4f3497f903",
       "name": "Information Extractor"
     },
     {
@@ -143,17 +142,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        800,
-        240
+        -540,
+        260
       ],
-      "id": "e231e079-9b9c-4cb8-8697-3a09411bd82d",
-      "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
-        }
-      }
+      "id": "0e395202-2775-4d5a-9dcc-87f46f5d63d1",
+      "name": "Google Gemini Chat Model"
     },
     {
       "parameters": {
@@ -268,17 +261,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.6,
       "position": [
-        1060,
-        20
+        -280,
+        40
       ],
-      "id": "aebbcb08-a220-48d8-8328-16add0fbaeb8",
-      "name": "Append row in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "ovNEOs3tPDTKTp3H",
-          "name": "Google Sheets account"
-        }
-      }
+      "id": "421e895b-42a4-432a-8ac4-624f4b332b2f",
+      "name": "Append row in sheet"
     },
     {
       "parameters": {
@@ -286,16 +273,16 @@
         "text": "=Invoice Number: {{ $json['Invoice Number'] }}\nClient Name: {{ $json['Client Name'] }}\nTotal Amount: {{ $json['Total Amount '] }}\nInvoice Date: {{ $json['Invoice Date'] }}\nDue Date: {{ $json['Due Date '] }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "#overview\nYou are an email expert for ABC Tech Solutions.\nyou will recieve invoice information\nyour job is to notify the internal billin gteam that an invoice was recieved/sent.\nask them to process this invoice accordingly\n\nalways end the subject by adding /n/n/n/n/n\n\n##Email\ninform the billing team about the invoice. let them knwo we have updated this in the invoice data base. and they can view it here :\nhttps://docs.google.com/spreadsheets/d/1EStCWUMwAKfLfulkVgJL2Iy15gvQ5WHBvUQT3qsZm5A/edit?gid=0#gid=0\n\n#signature\nregards,\nMuhammad Abdullah\nn8n\n\n#output\njust the email and the subject\n\n\nmake sure that th eoutput fornatting of the email ois acccurate\ndo no tgive me json output\n"
+          "systemMessage": "#overview\nYou are an email expert for ABC Tech Solutions.\nyou will recieve invoice information\nyour job is to notify the internal billin gteam that an invoice was recieved/sent.\nask them to process this invoice accordingly\n\nalways end the subject by adding /n/n/n/n/n\n\n##Email\ninform the billing team about the invoice. let them knwo we have updated this in the invoice data base. and they can view it here :\nhttps://docs.google.com/spreadsheets/d/1EStCWUMwAKfLfulkVgJL2Iy15gvQ5WHBvUQT3qsZm5A/edit?gid=0#gid=0\n\n#signature\nregards,\nMuhammad Abdullah\nn8n\n\n#output\njust the email and the subject\n\n\nmake sure that the output formatting of the email ois acccurate\ndo no tgive me json output\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        1340,
-        -20
+        0,
+        0
       ],
-      "id": "69fa2e17-5e6d-4231-8a16-09ab6d4e9034",
+      "id": "10d2dc8b-8939-46b8-bf66-54e5028216a5",
       "name": "AI Agent",
       "retryOnFail": true
     },
@@ -307,17 +294,11 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        1340,
-        220
+        0,
+        240
       ],
-      "id": "1e85f3cc-c031-4ddb-b215-cfcfdc263075",
-      "name": "Google Gemini Chat Model2",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "dLeMTu1QAquCNKdn",
-          "name": "Gemini creds"
-        }
-      }
+      "id": "15332df4-b5a2-415c-aa75-5bc31ea0d55c",
+      "name": "Google Gemini Chat Model2"
     },
     {
       "parameters": {
@@ -329,10 +310,10 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
       "typeVersion": 1,
       "position": [
-        1520,
-        200
+        180,
+        220
       ],
-      "id": "8ba87f31-84d6-410a-89f7-cc6bc68e81a6",
+      "id": "2451b553-41eb-48a4-a6d5-4058cad70354",
       "name": "Item List Output Parser1"
     },
     {
@@ -348,20 +329,126 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1700,
-        -20
+        360,
+        0
       ],
-      "id": "a52bde37-bd64-49fe-b393-2f2dd47babe2",
+      "id": "b057ded0-cdc9-433a-92d7-581316def566",
       "name": "Send a message",
       "webhookId": "92042a39-014b-40c9-ac2a-4be219367a9b",
       "credentials": {
         "gmailOAuth2": {
-          "id": "FpuJrKjxW0I7n3N1",
+          "id": "DFMTRttXzSv3skXi",
           "name": "Gmail account"
         }
       }
     }
   ],
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item List Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
   "pinData": {
     "Google Drive Trigger": [
       {
@@ -495,116 +582,7 @@
       }
     ]
   },
-  "connections": {
-    "Google Drive Trigger": {
-      "main": [
-        [
-          {
-            "node": "Download file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download file": {
-      "main": [
-        [
-          {
-            "node": "Extract from File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract from File": {
-      "main": [
-        [
-          {
-            "node": "Information Extractor",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Information Extractor",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Information Extractor": {
-      "main": [
-        [
-          {
-            "node": "Append row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Append row in sheet": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Gemini Chat Model2": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Item List Output Parser1": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Send a message",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "versionId": "4f12d980-3c87-446b-be51-90d6a4b0c035",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "510fe6203072535093bb2ab3dd1e4cf8176cc90da3bee7f259f9edc18a9c8dd7"
-  },
-  "id": "X0KbNp6STUxyxl31",
+  "versionId": "74d81338-c8df-4175-85e4-e80b1b2150d0",
+  "triggerCount": 0,
   "tags": []
 }
