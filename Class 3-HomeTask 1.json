@@ -1,0 +1,453 @@
+{
+  "createdAt": "2025-08-14T19:53:16.812Z",
+  "updatedAt": "2025-08-14T20:59:25.000Z",
+  "id": "4LQayXmh2A7XqfR9",
+  "name": "Class 3-HomeTask 1",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "value": "https://airtable.com/appbLwee0dGQ2SJz5/tblcMdaCsujU9BTlH/viwWRRSvuEuJxb2wx?blocks=hide",
+          "mode": "url"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "https://airtable.com/appbLwee0dGQ2SJz5/tblcMdaCsujU9BTlH/viwWRRSvuEuJxb2wx?blocks=hide",
+          "mode": "url"
+        },
+        "triggerField": "Status",
+        "additionalFields": {
+          "fields": ""
+        }
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        125
+      ],
+      "id": "9ec856a9-1763-4901-8483-95b349bd8d89",
+      "name": "Airtable Trigger",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "NwzP4LTFYojbLbOG",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appbLwee0dGQ2SJz5",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblcMdaCsujU9BTlH",
+          "mode": "list",
+          "cachedResultName": "Tasks",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5/tblcMdaCsujU9BTlH"
+        },
+        "filterByFormula": "{Status} = 'Draft'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        200,
+        125
+      ],
+      "id": "ce5d4692-beaa-41c9-ad3c-b76a3f95562d",
+      "name": "Search records",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "NwzP4LTFYojbLbOG",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        720,
+        220
+      ],
+      "id": "bc690545-b87f-4f23-bad2-31fccb608c48",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        220
+      ],
+      "id": "29255060-79b1-41f6-b489-5725dc59949d",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        420,
+        125
+      ],
+      "id": "6fac0c7e-e00f-48e7-8f76-acc203ba8da0",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appbLwee0dGQ2SJz5",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblcMdaCsujU9BTlH",
+          "mode": "list",
+          "cachedResultName": "Tasks",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5/tblcMdaCsujU9BTlH"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Search records').item.json.id }}",
+            "Status": "Completed",
+            "Product Description": "={{ $('Product Description').item.json.output }}",
+            "Tagline": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Product Name",
+              "displayName": "Product Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Features",
+              "displayName": "Features",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Draft",
+                  "value": "Draft"
+                },
+                {
+                  "name": "Completed",
+                  "value": "Completed"
+                },
+                {
+                  "name": "Status",
+                  "value": "Status"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Product Description",
+              "displayName": "Product Description",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tagline",
+              "displayName": "Tagline",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1360,
+        0
+      ],
+      "id": "67882e45-3706-4209-902a-49b60fd69248",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "NwzP4LTFYojbLbOG",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "mrabdullah80808080@gmail.com",
+        "subject": "={{ $('Tagline').item.json.output }}",
+        "message": "={{ $('Product Description').item.json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1580,
+        125
+      ],
+      "id": "080d0319-eae8-401c-9eb7-34b2af97e32b",
+      "name": "Send a message",
+      "webhookId": "dfcc8f43-f826-4bef-b296-573e7a52bf33",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## AirTable\nSends an email to the marketing team!\n",
+        "height": 480,
+        "width": 1860
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -100,
+        -120
+      ],
+      "typeVersion": 1,
+      "id": "12718505-d591-4951-ae7b-3cfb793c53ca",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=this is the product name:  {{ $json['Product Name'] }}\n\nand \n\n\nthese are the features: {{ $json.Features }}\n\ngive me detailed product description from the given features.",
+        "options": {
+          "systemMessage": "just give me the product desctiption no extra details and no header or no \"Here is your respoce balh blah\"!"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        640,
+        0
+      ],
+      "id": "6055afac-8cd9-492d-9b6d-4ab305bf41b6",
+      "name": "Product Description",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=this is the product name:  {{ $('Search records').item.json['Product Name'] }}\n\n,\n\n\nthese are the features:{{ $('Search records').item.json.Features }}\n\nand here is a detailed product description: {{ $json.output }}\n\n\nCreate a short, catchy marketing tagline for the product.\n\n\n",
+        "options": {
+          "systemMessage": "just give me the product tag line no extra details and no header or no \"Here is your respoce balh blah\"!"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        0
+      ],
+      "id": "54eb6900-9651-4ba5-b34e-0e64815f2ca1",
+      "name": "Tagline"
+    }
+  ],
+  "connections": {
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Product Description",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Tagline",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Product Description",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product Description": {
+      "main": [
+        [
+          {
+            "node": "Tagline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tagline": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "4ef2b28b-8d5e-4fdd-9d04-d76ab50f84d2",
+  "triggerCount": 0,
+  "tags": []
+}
