@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-07-29T19:25:01.827Z",
-  "updatedAt": "2025-08-06T05:13:14.000Z",
+  "updatedAt": "2025-08-10T21:31:00.000Z",
   "id": "cIcFd2pLa8xq74jf",
   "name": "RAG_Pipeline_and_Chatbot",
   "active": false,
@@ -124,7 +124,9 @@
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "systemMessage": "You are a helpful assistant\nAlwasy refer to the FAQ Documetn no matter what!\n\nIf you cannot find about any information then justt simply say we do not provide this service in apolite manner\n\nAlways refer to the database no matter what.\n\nDo not reply that I do not have enough information or I couldt find this information"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
@@ -609,7 +611,7 @@
       }
     ]
   },
-  "versionId": "10f5ad51-e3de-49f0-a9eb-a5d3d4c55e34",
+  "versionId": "bacccb5a-8bd5-41f3-9a24-07ef0a6f4f05",
   "triggerCount": 2,
   "tags": []
 }
