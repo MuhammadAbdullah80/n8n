@@ -1,0 +1,999 @@
+{
+  "createdAt": "2025-08-10T21:37:28.054Z",
+  "updatedAt": "2025-08-14T20:35:39.000Z",
+  "id": "wmVWLA4J8ZqsmmD9",
+  "name": "Class 2-HomeTask 2",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drive_link",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Pending"
+            },
+            {
+              "lookupColumn": "Email Status",
+              "lookupValue": "Pending"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        640,
+        240
+      ],
+      "id": "51beb64a-1d1a-4b30-9020-f3c51654ae0b",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drive_link",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        240
+      ],
+      "id": "400a7ea6-262c-4d2f-93f8-8a01e1174458",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "kTnSBDqxRc4L1C24",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        860,
+        240
+      ],
+      "id": "87feebfa-aa9a-4abf-90f2-0f6581e3adfa",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        420,
+        240
+      ],
+      "id": "23e16dcc-dd38-4ce6-8a81-6fd4a03ea87c",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Questions }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant\nAlwasy refer to the FAQ Documetn no matter what!\n\nIf you cannot find about any information then justt simply say we do not provide this service in apolite manner\n\nAlways refer to the database no matter what.\n\nDo not reply that I do not have enough information or I couldt find this information"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        -60
+      ],
+      "id": "b3addc4f-3320-447b-a940-f739a5980a07",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Call this tool to access the policy and FAQ DataBase",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "rag-pipeline",
+          "mode": "list",
+          "cachedResultName": "rag-pipeline"
+        },
+        "options": {
+          "pineconeNamespace": "FAQ"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1420,
+        162.5
+      ],
+      "id": "fe9cf900-965d-4cea-9630-e6342f7d06d8",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "V03abXRgsqiHEBqm",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        360
+      ],
+      "id": "63efad81-288f-4874-95c1-0c996bd7c3fc",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        160
+      ],
+      "id": "d6c59026-ee02-4085-83b3-020444542632",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Google Sheets\nAutomatically replies through Email\n",
+        "height": 880,
+        "width": 2940,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        80,
+        -380
+      ],
+      "typeVersion": 1,
+      "id": "698811d3-7a70-4b9d-bd63-2ceec9f0d101",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get row(s) in sheet1').item.json.Email }}",
+        "subject": "={{ $json['0'] }}",
+        "emailType": "text",
+        "message": "={{ $json['1'] }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": ""
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2580,
+        15
+      ],
+      "id": "218a738a-3021-48b8-a487-9175501843d1",
+      "name": "Send a message",
+      "webhookId": "4661903a-1675-43a8-bf8d-e2a715155d60",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        335
+      ],
+      "id": "b86c700e-e21c-4958-a124-6395416de2d1",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "numberOfItems": 2,
+          "separator": "\\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserItemList",
+      "typeVersion": 1,
+      "position": [
+        2360,
+        335
+      ],
+      "id": "25108f9f-6b81-40bc-9991-aa35c9f901c8",
+      "name": "Item List Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Answer }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an AI assistant that formats a reply to a customer question, where:\n\nThe question is:{{ $json.Questions }}\n\nThe answer is: {{ $json.Answer }}\n\nDo not return JSON.\n \nYour output must be plain text only, following this exact format:\n\nWrite the question text exactly as provided above, removing any leading or trailing spaces or line breaks.\n\nImmediately after the question, insert exactly two \\n (line breaks) — no more, no less.\n\nWrite a short, polite answer (2–4 sentences) based on the answer text above, removing any leading or trailing spaces or line breaks from it.\n\nExample: <Question>\\n\\n<Answer>\n\n⚠️ Rules:\nNo more than 3 line breaks in the output overall\n\nDo not return JSON or any structured data—output only plain text.\n\nDo not add labels like “Question:” or “Answer:”.\n\nDo not include greetings or sign-offs.\n\nDo not use extra spacing, markdown, or emojis.\n\n\n\nExample: <Question>\\n\\n<Answer>\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2220,
+        115
+      ],
+      "id": "0c842440-452c-439d-9ca5-dd885b926c08",
+      "name": "AI Agent1",
+      "retryOnFail": true,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "efcc2b7b-94ce-4c05-8cf5-9a4b8837687e",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "Pending",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        115
+      ],
+      "id": "19302dff-2a0c-40c7-b757-fe2e927a95be",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c652524d-ad0a-4fe5-91eb-35e2fad51af3",
+              "leftValue": "={{ $json['Email Status'] }}",
+              "rightValue": "Pending",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1780,
+        290
+      ],
+      "id": "333e2da1-26f0-404b-9bd3-0ae13fad2ebc",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4",
+          "mode": "list",
+          "cachedResultName": "Customer Questions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email Status": "Answered",
+            "Email Answer": "={{ $json['1'] }}",
+            "Questions": "={{ $('Get row(s) in sheet1').item.json.Questions }}"
+          },
+          "matchingColumns": [
+            "Questions"
+          ],
+          "schema": [
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Questions",
+              "displayName": "Questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email Status",
+              "displayName": "Email Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Answer",
+              "displayName": "Answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email Answer",
+              "displayName": "Email Answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2580,
+        290
+      ],
+      "id": "31331499-f8ce-4086-aeed-07949599eb02",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4",
+          "mode": "list",
+          "cachedResultName": "Customer Questions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Answer": "={{ $json.output }}",
+            "Questions": "={{ $('If').item.json.Questions }}",
+            "Status": "Answered"
+          },
+          "matchingColumns": [
+            "Questions"
+          ],
+          "schema": [
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Questions",
+              "displayName": "Questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email Status",
+              "displayName": "Email Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Answer",
+              "displayName": "Answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email Answer",
+              "displayName": "Email Answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1780,
+        -60
+      ],
+      "id": "d7ce31c5-eba3-4c91-9d83-674fcd6610d3",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4",
+          "mode": "list",
+          "cachedResultName": "Customer Questions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Questions",
+              "lookupValue": "={{ $json.Questions }}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2000,
+        115
+      ],
+      "id": "1a9a3c7d-feec-478d-bfad-42a527236540",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        290
+      ],
+      "id": "e44d1069-83d8-4eda-b427-7b19463f1678",
+      "name": "Aggregate1"
+    }
+  ],
+  "connections": {
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item List Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Google Sheets Trigger": [
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "Can I cancel my order after it has been dispatched?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "After dispatch, orders cannot be canceled.",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "Do you share customer information with third parties?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "We do not share or sell customer data with third parties.\n",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "Can I return a customized product if I don’t like it?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "Customized items are non-returnable.\n",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "Is Cash on Delivery available for orders above Rs. 10,000?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "No, Cash on Delivery (COD) is available for all orders under Rs. 10,000. For larger orders, prepayment is required.\n",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "Can I exchange an item if I ordered the wrong size?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "Yes, items can be exchanged within 7 days of delivery, provided they are unused, undamaged, and in their original packaging. However, the customer is responsible for return shipping charges unless the product was damaged or incorrect.\n",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "What is the Cancellation Policy?",
+          "Email Status": "Pending",
+          "Status": "Answered",
+          "Answer": "Orders can be canceled within 6 hours of placement by contacting customer support. After dispatch, orders cannot be canceled.\n",
+          "Email Answer": ""
+        }
+      },
+      {
+        "json": {
+          "Email": "mrabdullah80808080@gmail.com",
+          "Questions": "What is your Instagram?",
+          "Email Status": "Pending",
+          "Status": "Pending",
+          "Answer": "I am sorry, I do not have the answer to your question about our Instagram account. The information I have access to includes details on shipping charges, privacy policy, and data usage, but not social media account information.\n",
+          "Email Answer": "I am sorry, I cannot find the answer to your question. The FAQ document does not contain information about our Instagram."
+        }
+      }
+    ],
+    "Aggregate": [
+      {
+        "json": {
+          "data": [
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "Can I cancel my order after it has been dispatched?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "After dispatch, orders cannot be canceled.",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "Do you share customer information with third parties?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "We do not share or sell customer data with third parties.\n",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "Can I return a customized product if I don’t like it?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "Customized items are non-returnable.\n",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "Is Cash on Delivery available for orders above Rs. 10,000?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "No, Cash on Delivery (COD) is available for all orders under Rs. 10,000. For larger orders, prepayment is required.\n",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "Can I exchange an item if I ordered the wrong size?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "Yes, items can be exchanged within 7 days of delivery, provided they are unused, undamaged, and in their original packaging. However, the customer is responsible for return shipping charges unless the product was damaged or incorrect.\n",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "What is the Cancellation Policy?",
+              "Email Status": "Pending",
+              "Status": "Answered",
+              "Answer": "Orders can be canceled within 6 hours of placement by contacting customer support. After dispatch, orders cannot be canceled.\n",
+              "Email Answer": ""
+            },
+            {
+              "Email": "mrabdullah80808080@gmail.com",
+              "Questions": "What is your Instagram?",
+              "Email Status": "Pending",
+              "Status": "Pending",
+              "Answer": "I am sorry, I do not have the answer to your question about our Instagram account. The information I have access to includes details on shipping charges, privacy policy, and data usage, but not social media account information.\n",
+              "Email Answer": "I am sorry, I cannot find the answer to your question. The FAQ document does not contain information about our Instagram."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "versionId": "fe8905fe-601b-4c44-b228-a5a815501187",
+  "triggerCount": 0,
+  "tags": []
+}
