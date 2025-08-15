@@ -1,0 +1,942 @@
+{
+  "createdAt": "2025-08-10T20:06:35.991Z",
+  "updatedAt": "2025-08-10T21:38:03.000Z",
+  "id": "AdlJZ9Aqpka8Fa6U",
+  "name": "Class 2-HomeTask 1",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drive_link",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        780,
+        0
+      ],
+      "id": "7558f2e4-4f03-4fa7-9a6f-ac02ff0c3640",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFile",
+        "fileToWatch": {
+          "__rl": true,
+          "value": "https://drive.google.com/file/d/1uf73P-ks0XAR9EsySnCU7V0v3MheMeKx/view?usp=drive_link",
+          "mode": "url"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -680
+      ],
+      "id": "7651a387-5d6c-479c-8c44-8cc659efe74f",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        380,
+        -680
+      ],
+      "id": "561c4250-fdf0-4d78-b02e-2433b28d3c6a",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "rag-pipeline",
+          "mode": "list",
+          "cachedResultName": "rag-pipeline"
+        },
+        "options": {
+          "pineconeNamespace": "FAQ"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        680,
+        -680
+      ],
+      "id": "4fde74dd-24bb-4f68-abb0-f98cd404a1fd",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "V03abXRgsqiHEBqm",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        -440
+      ],
+      "id": "b01661ff-04f5-4a6b-86a6-3a0724a207de",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 500,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        800,
+        -280
+      ],
+      "id": "ea2954bc-21f9-495d-887d-355f8c049a47",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -440
+      ],
+      "id": "2416352f-ead6-4ba9-a850-90c84de48d33",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Storage\nStores the data about the FAQ document to be later fetched",
+        "height": 660,
+        "width": 1140,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        -780
+      ],
+      "typeVersion": 1,
+      "id": "4b31c4dc-7a31-4cdd-8ffb-f9a8bc4b8c62",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drive_link",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        280,
+        0
+      ],
+      "id": "b1444759-3152-468f-9ad8-315aba3e783b",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "kTnSBDqxRc4L1C24",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        0
+      ],
+      "id": "5569e703-f2d0-4d9b-abcb-b2bbd7b44bf1",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        500,
+        0
+      ],
+      "id": "512b040a-ca3c-4244-a87b-45cf10fe233b",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Questions }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant\nAlwasy refer to the FAQ Documetn no matter what!\n\nIf you cannot find about any information then justt simply say we do not provide this service in apolite manner\n\nAlways refer to the database no matter what.\n\nDo not reply that I do not have enough information or I couldt find this information"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        20
+      ],
+      "id": "5f10cf8d-f15e-476f-9c54-92d3e817db58",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Call this tool to access the policy and FAQ DataBase",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "rag-pipeline",
+          "mode": "list",
+          "cachedResultName": "rag-pipeline"
+        },
+        "options": {
+          "pineconeNamespace": "FAQ"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1480,
+        260
+      ],
+      "id": "3ef0ef6f-3948-4601-8c71-aa0bb9d03740",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "V03abXRgsqiHEBqm",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        420
+      ],
+      "id": "b812747f-77cc-4d42-b6ef-9c2b036c1011",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        240
+      ],
+      "id": "c1c0c9b0-fd0e-4705-9778-ece130e2c3a6",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4",
+          "mode": "list",
+          "cachedResultName": "Customer Questions",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1uxiZnT0i_KyslEDXz-Y7bdPxIf8YZalU-po0A7YkkT4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Answered",
+            "Questions": "={{ $('Get row(s) in sheet').item.json.Questions }}",
+            "Answer": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            "Questions"
+          ],
+          "schema": [
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Questions",
+              "displayName": "Questions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Answer",
+              "displayName": "Answer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1700,
+        20
+      ],
+      "id": "8fe6866c-5147-4ad0-b2ba-9e00bd343033",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        1240,
+        -660
+      ],
+      "id": "d2d24689-79ea-42b8-b24f-01e2621d6695",
+      "name": "When chat message received",
+      "webhookId": "68231bec-b381-440a-b497-36e9f335212f"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant\nAlwasy refer to the FAQ Documetn no matter what!\n\nIf you cannot find about any information then justt simply say we do not provide this service in apolite manner\n\nAlways refer to the database no matter what.\n\nDo not reply that I do not have enough information or I couldt find this information"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1480,
+        -680
+      ],
+      "id": "d36a2ba1-c790-4d7f-9978-2adefb76c19e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Call this tool to access the policy and FAQ DataBase nad contact information",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "rag-pipeline",
+          "mode": "list",
+          "cachedResultName": "rag-pipeline"
+        },
+        "topK": 7,
+        "options": {
+          "pineconeNamespace": "FAQ"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1680,
+        -460
+      ],
+      "id": "60117138-fc64-4189-82a2-80d1af4f4453",
+      "name": "Pinecone Vector Store2",
+      "credentials": {
+        "pineconeApi": {
+          "id": "V03abXRgsqiHEBqm",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1700,
+        -280
+      ],
+      "id": "2736d6f6-8bfb-41b7-b73e-90e4615b1632",
+      "name": "Embeddings Google Gemini2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.0-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        -460
+      ],
+      "id": "9634d2c3-d783-4330-a334-96cbabdde339",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1580,
+        -480
+      ],
+      "id": "c93910c1-2b12-44da-a7fe-c5b7f8bfe8dc",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## ChatBot\nTalk to me about FAQs\n",
+        "height": 660,
+        "width": 780
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1180,
+        -780
+      ],
+      "typeVersion": 1,
+      "id": "8652c8c5-0ebb-4a06-b318-fda7feab9ef8",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Google Sheets",
+        "height": 660,
+        "width": 1960,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "579b1634-e14e-48f5-ba8b-e5eca38fc4e7",
+      "name": "Sticky Note2"
+    }
+  ],
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Google Drive Trigger": [
+      {
+        "json": {
+          "parents": [
+            "1RW8WWRIaPNkUoqX_UeCquWhaHwCzoY9x"
+          ],
+          "lastModifyingUser": {
+            "displayName": "Abdullah Kamran",
+            "kind": "drive#user",
+            "me": true,
+            "permissionId": "03231910324326723326",
+            "emailAddress": "abdullahk80808080@gmail.com",
+            "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjW5La1MEU8Ln4TT6CLR4kR9JAI_SIVTIhzDWHiO31YYExiFY2habqxHOndqoE0MndM4KlHsKZBk6ZlXvkd3AFrrET7UqyVdynyshjlbNCkk1N_ckSe8kuilaboMDN3peboQfqG5m0ufCqfeYsN0Zxkncr9IhpI7I2CrBibkhH2QXQ_Is57S3Mao3egXPZaQ2qoy3F3hFpGB4pp4iExtK9X9uS9ghUwCXCxIiiduNU6RWg9Mww2-ssmOfbndcUeXSTQufI58ccWXOVyUe5cZ_EyVzVyex2Vi_Tc-eX03kyjQDHbL_CIIlhNNXVz3q7z4LbJo5dMeTg0bys0UNOgYNlyXwvilPNfB2z0nel2tvY_h3eGyFEFo4_XSZSDmsWU-S5Q9zWxD3w9TIH9agyajIXHinbxCaACZ7i6QJ0PgeCYU-gCmKF95GvyNsuB0Tnl6YHJXV90XQsFaxWZdFHiBNw2SQncL4-ITskerY8IDkOqUn8n8EvRA6srvGeWkQcnY7E-wLFRmfjS6jw4FbO5Q178m7kuUeiU6A9-ZViDFsC60x-4_ZL3JZBlo-vusgRmUiICUewmMfQAMwcTFhafFO7tCz9NdAsPp8GHmjvRyYS-N3ulfCjcE84TfzqQjAuzkfzile0anK-b8J24tNfS2ZIfkVC6qqQDVcAfR32rW19WyNaIDtmXTgdHjRMcfkYtozimzHLE2uarZylSnwNS_1TXuNkixDOXqrHjeU9sMdDkeDmMym8a4_xAPcLsQVn-7gp78XHgF3o3n-nKzTpdvlNr4cNJQ0gFwIzU3t6nvI5BmHVLvO8XclixqTABpw6mg2iyKeY_M3JCExa8mt1JdrhZ8v1pN5amsse46I09IBFHwezodZgwk98z_z4R50ZYLp8VnQMqsfTMSPFIkWwAaTXoiMIsFMEel7W9aXwlKnWgsc9GACvPbP7tIbMVB7BrV36shJ7CY_qNzmrzI__2JoXydlCvjLxM=s64"
+          },
+          "owners": [
+            {
+              "displayName": "Abdullah Kamran",
+              "kind": "drive#user",
+              "me": true,
+              "permissionId": "03231910324326723326",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjW5La1MEU8Ln4TT6CLR4kR9JAI_SIVTIhzDWHiO31YYExiFY2habqxHOndqoE0MndM4KlHsKZBk6ZlXvkd3AFrrET7UqyVdynyshjlbNCkk1N_ckSe8kuilaboMDN3peboQfqG5m0ufCqfeYsN0Zxkncr9IhpI7I2CrBibkhH2QXQ_Is57S3Mao3egXPZaQ2qoy3F3hFpGB4pp4iExtK9X9uS9ghUwCXCxIiiduNU6RWg9Mww2-ssmOfbndcUeXSTQufI58ccWXOVyUe5cZ_EyVzVyex2Vi_Tc-eX03kyjQDHbL_CIIlhNNXVz3q7z4LbJo5dMeTg0bys0UNOgYNlyXwvilPNfB2z0nel2tvY_h3eGyFEFo4_XSZSDmsWU-S5Q9zWxD3w9TIH9agyajIXHinbxCaACZ7i6QJ0PgeCYU-gCmKF95GvyNsuB0Tnl6YHJXV90XQsFaxWZdFHiBNw2SQncL4-ITskerY8IDkOqUn8n8EvRA6srvGeWkQcnY7E-wLFRmfjS6jw4FbO5Q178m7kuUeiU6A9-ZViDFsC60x-4_ZL3JZBlo-vusgRmUiICUewmMfQAMwcTFhafFO7tCz9NdAsPp8GHmjvRyYS-N3ulfCjcE84TfzqQjAuzkfzile0anK-b8J24tNfS2ZIfkVC6qqQDVcAfR32rW19WyNaIDtmXTgdHjRMcfkYtozimzHLE2uarZylSnwNS_1TXuNkixDOXqrHjeU9sMdDkeDmMym8a4_xAPcLsQVn-7gp78XHgF3o3n-nKzTpdvlNr4cNJQ0gFwIzU3t6nvI5BmHVLvO8XclixqTABpw6mg2iyKeY_M3JCExa8mt1JdrhZ8v1pN5amsse46I09IBFHwezodZgwk98z_z4R50ZYLp8VnQMqsfTMSPFIkWwAaTXoiMIsFMEel7W9aXwlKnWgsc9GACvPbP7tIbMVB7BrV36shJ7CY_qNzmrzI__2JoXydlCvjLxM=s64"
+            }
+          ],
+          "permissions": [
+            {
+              "kind": "drive#permission",
+              "id": "anyoneWithLink",
+              "type": "anyone",
+              "role": "reader",
+              "allowFileDiscovery": false
+            },
+            {
+              "kind": "drive#permission",
+              "id": "03231910324326723326",
+              "type": "user",
+              "emailAddress": "abdullahk80808080@gmail.com",
+              "role": "owner",
+              "displayName": "Abdullah Kamran",
+              "photoLink": "https://lh3.googleusercontent.com/a-/ALV-UjUSEyCMRgNAJD84taHeFOgHWdx5NHKL33ttgvFZ4LyD7XPH7AxCbU0xAhr1-iBVZLCmy1ztYt-l9vFcgVKXRJnkDdfXvesszVMQJHd4zdqgxddb2yJ9SxabLQovNG0duFAlks6E5SLrH8RN-T0MgRoolO0A_tXptosKD2LKGFWexZ8Zfazcd8EJpBf44I_EvRTyHjGolbOPrBVzQaZyf7zjPQFZosnIlRLn76JGa4KcbXyuZ8C3dSVFHE96k8GMaptCfnk3HIcSHrh0kNlJJRudyvQoLaOUWbDxFe54RBkvvMttHo95JokQXbbbE21LXSzON6Ah-GzV9bRllqPKwgP0ORRJfNgjKi1PRcY-wn6foyyZfZI1WwE5HJnyKGEhFzbPbKJZ2VOQKJG-RFvINTLB17SQ_z3vmPxNvYGumsKMsJvED2PseCsDGvjZs8DGkVPQTCBrTZAXVWMdKndHncHCKOLpJyRmZkpAGyoavyMbNP9tiODs27VL1sGez4Ptuy4ZSSYRyH-ga4hfuwqTSgHtF-SeI7zB5-hgjzI0wc7ISffDRF0BuYB5FXHbl6sZ8H96eZK5w4egaq2k9tB7gvfNHnysSHi08Pfm0jbjmrUGA21goHyhj4RBW6Q_zQShxtC44ObR5Tzw-5xcqOlsQOwYcphXom7u035aT3v1WmLIVsd3q0mkFeJY_B2UcZDyUqi5J_wQu7I4oCEtToKL-Z5zb3McsfC9Wd5MGK4FxZ4Kyrzf4PbwV96KT5bxZfCbClqdywDgz-jXoYmKSBixntFngMv5LJPD7KmnQQLtUAF5KMtFkFnteDehdddNCcrR-a-uN314Q_MJXi8_axhO6Lqu5NUKwpm1gqPp5vltnFMq3SQGrVrCXZJKso5P_VFrn_4B0IUFrBGx9IN6JeqLftCai1h48F9vtO6YRg3VRgEeZzswq6OsqeSF9vQyAAyw-bBRaS9IdsGGNZ8Fs7yL8vSE5XScMFE=s64",
+              "deleted": false,
+              "pendingOwner": false
+            }
+          ],
+          "spaces": [
+            "drive"
+          ],
+          "capabilities": {
+            "canAcceptOwnership": false,
+            "canAddChildren": false,
+            "canAddMyDriveParent": false,
+            "canChangeCopyRequiresWriterPermission": true,
+            "canChangeItemDownloadRestriction": true,
+            "canChangeSecurityUpdateEnabled": false,
+            "canChangeViewersCanCopyContent": true,
+            "canComment": true,
+            "canCopy": true,
+            "canDelete": true,
+            "canDisableInheritedPermissions": false,
+            "canDownload": true,
+            "canEdit": true,
+            "canEnableInheritedPermissions": true,
+            "canListChildren": false,
+            "canModifyContent": true,
+            "canModifyContentRestriction": true,
+            "canModifyEditorContentRestriction": true,
+            "canModifyOwnerContentRestriction": true,
+            "canModifyLabels": false,
+            "canMoveChildrenWithinDrive": false,
+            "canMoveItemIntoTeamDrive": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canReadLabels": false,
+            "canReadRevisions": true,
+            "canRemoveChildren": false,
+            "canRemoveContentRestriction": false,
+            "canRemoveMyDriveParent": true,
+            "canRename": true,
+            "canShare": true,
+            "canTrash": true,
+            "canUntrash": true
+          },
+          "permissionIds": [
+            "anyoneWithLink",
+            "03231910324326723326"
+          ],
+          "linkShareMetadata": {
+            "securityUpdateEligible": false,
+            "securityUpdateEnabled": true
+          },
+          "downloadRestrictions": {
+            "itemDownloadRestriction": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            },
+            "effectiveDownloadRestrictionWithContext": {
+              "restrictedForReaders": false,
+              "restrictedForWriters": false
+            }
+          },
+          "kind": "drive#file",
+          "id": "1uf73P-ks0XAR9EsySnCU7V0v3MheMeKx",
+          "name": "🌿 UrbanNest.pdf",
+          "mimeType": "application/pdf",
+          "starred": false,
+          "trashed": false,
+          "explicitlyTrashed": false,
+          "version": "7",
+          "webContentLink": "https://drive.google.com/uc?id=1uf73P-ks0XAR9EsySnCU7V0v3MheMeKx&export=download",
+          "webViewLink": "https://drive.google.com/file/d/1uf73P-ks0XAR9EsySnCU7V0v3MheMeKx/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/pdf",
+          "hasThumbnail": true,
+          "thumbnailLink": "https://lh3.googleusercontent.com/drive-storage/AJQWtBOa11x0BkLauFwqNgzsiirWf93cKr13h4lD4DrnD898PJoihlnR0VPW1ccHKEeOc4_tAUueHWNiC-5IkC2YtoxkLo5Ob2TYgwmr071K-f0QGg=s220",
+          "thumbnailVersion": "1",
+          "viewedByMe": true,
+          "viewedByMeTime": "2025-08-10T20:06:23.998Z",
+          "createdTime": "2025-08-10T20:03:41.960Z",
+          "modifiedTime": "2025-08-10T20:09:03.668Z",
+          "modifiedByMeTime": "2025-08-10T20:09:03.668Z",
+          "modifiedByMe": true,
+          "shared": true,
+          "ownedByMe": true,
+          "viewersCanCopyContent": true,
+          "copyRequiresWriterPermission": false,
+          "writersCanShare": true,
+          "originalFilename": "🌿 UrbanNest.pdf",
+          "fullFileExtension": "pdf",
+          "fileExtension": "pdf",
+          "md5Checksum": "506c4581da7586773c338ef14d54ba76",
+          "sha1Checksum": "9ed2b3d7643b087f26ce2a5fe1d6a5bd310fd41c",
+          "sha256Checksum": "146c657a58607e9cedb7cff4d5c0b05cfd845f0386c4fef50df572ce954ab0f8",
+          "size": "3920885",
+          "quotaBytesUsed": "3920885",
+          "headRevisionId": "0B9hadl0PtyJsbVQ1aDJMckYrNzZ2L081U1ltc2hTS1hxeDY4PQ",
+          "isAppAuthorized": false,
+          "inheritedPermissionsDisabled": false
+        }
+      }
+    ]
+  },
+  "versionId": "73cabd90-297e-4228-89a1-d95c0f656b56",
+  "triggerCount": 0,
+  "tags": []
+}
