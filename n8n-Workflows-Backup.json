@@ -1,9 +1,9 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-06T08:07:16.000Z",
+  "updatedAt": "2025-08-17T21:12:03.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
-  "active": true,
+  "active": false,
   "isArchived": false,
   "nodes": [
     {
@@ -241,6 +241,38 @@
       "typeVersion": 1,
       "id": "eb4a7b98-7037-4117-a82a-80ff91c77c40",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Here!\nUse your\nn8n API\n",
+        "height": 100,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -180,
+        -100
+      ],
+      "typeVersion": 1,
+      "id": "2de0e07f-8fb1-4d92-a624-f097fcbcc006",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Here!\nUse your\nGitHub Account\n",
+        "height": 100,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1120,
+        -140
+      ],
+      "typeVersion": 1,
+      "id": "ccfd9263-ee40-48a6-bfc8-5302a0ad3016",
+      "name": "Sticky Note2"
     }
   ],
   "connections": {
@@ -348,7 +380,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "b25e6da6-be3f-4f9b-ac8c-92549668f486",
+  "versionId": "297f0827-4170-430f-a841-8f6de1ef233c",
   "triggerCount": 1,
   "tags": []
 }
