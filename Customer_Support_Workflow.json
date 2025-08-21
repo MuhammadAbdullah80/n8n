@@ -1,5 +1,10 @@
 {
+  "createdAt": "2025-08-21T21:46:10.409Z",
+  "updatedAt": "2025-08-21T21:46:10.409Z",
+  "id": "DNqBzEYtN8Vhu5rl",
   "name": "Customer_Support_Workflow",
+  "active": false,
+  "isArchived": false,
   "nodes": [
     {
       "parameters": {
@@ -24,7 +29,7 @@
       "name": "Gmail Trigger",
       "credentials": {
         "gmailOAuth2": {
-          "id": "FpuJrKjxW0I7n3N1",
+          "id": "DFMTRttXzSv3skXi",
           "name": "Gmail account"
         }
       }
@@ -148,7 +153,7 @@
       "name": "Pinecone Vector Store",
       "credentials": {
         "pineconeApi": {
-          "id": "X8LrJvQ5votFP4Um",
+          "id": "V03abXRgsqiHEBqm",
           "name": "PineconeApi account"
         }
       }
@@ -193,78 +198,12 @@
       "webhookId": "703a40a8-029d-4ff3-aa85-ccb955d93cc0",
       "credentials": {
         "gmailOAuth2": {
-          "id": "FpuJrKjxW0I7n3N1",
+          "id": "DFMTRttXzSv3skXi",
           "name": "Gmail account"
         }
       }
     }
   ],
-  "pinData": {
-    "Gmail Trigger": [
-      {
-        "json": {
-          "id": "197d4d434b846c96",
-          "threadId": "197d4d434b846c96",
-          "labelIds": [
-            "UNREAD",
-            "CATEGORY_PERSONAL",
-            "INBOX"
-          ],
-          "sizeEstimate": 6401,
-          "headers": {
-            "delivered-to": "Delivered-To: abdullahk80808080@gmail.com",
-            "received": "Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])\r\n        by mx.google.com with SMTPS id 586e51a60fabf-2f78fdef36fsor469831fac.1.2025.07.04.02.46.06\r\n        for <abdullahk80808080@gmail.com>\r\n        (Google Transport Security);\r\n        Fri, 04 Jul 2025 02:46:06 -0700 (PDT)",
-            "x-received": "X-Received: by 2002:a05:6871:4093:b0:2d6:b7f:1e6d with SMTP id\r\n 586e51a60fabf-2f7964f30b9mr969997fac.0.1751622365568; Fri, 04 Jul 2025\r\n 02:46:05 -0700 (PDT)",
-            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1751622366; cv=none;\r\n        d=google.com; s=arc-20240605;\r\n        b=HDUTQVBDBwHmBvsriO5PoG0D3ICoGhYKnRZkdW8wMx7Dm1OsALpxVgpK+S9Bt4G3YK\r\n         j2MZb7FT2gVxxGkgideOA0D/a3lGSSGexz/E/PgMOqTMEeJMRLnvVkBhIPeujiUu8I0y\r\n         REN7sCoKgRlCAH1aUo8IxC1aMty+Lezfrk4H0+oZgXYU4oEmyAHpAfNBsOrltbU1avBM\r\n         zoO+Wfm97n1GSHYbM1lY8KR5pZbhVQDqvWLmR16QRXVXDPoxaueh16PsSydAj3eNwbgV\r\n         ebfvzSofOV31PweFmdhmjmT/J2deCKyXyR+xIwOjEXKorncHsKpYWQ7h8qGj4ZJvoKXS\r\n         R1aA==",
-            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;\r\n        h=to:subject:message-id:date:from:mime-version:dkim-signature;\r\n        bh=eNmQ0a0+qG1DMP8AdwbRxvoF1LgUbEvsIafp8J05a2s=;\r\n        fh=V7EULkMC1yZbVvXQcW45TFBNvg5YL951ju4COmU2exg=;\r\n        b=dXe6R7Wfy6rOlaqnHFIs/sbR+461qRGqa70jOzp+W399VuMbZE6IMln3XNZv1kEkAc\r\n         nHFv6WM5wi5ZWsoPHJsEttZO7fWipzAMDIVHVDo70u/lB1oX0d+rSCNu8LgpAA7vDJjd\r\n         d1m3cDPKTeIQw+sF3f0ex8gYsjyK2Uf5xzfGkgEVypdhmEsLg7SOi/SWeN3YUEE6l542\r\n         4hiPxvSUjdCzNYvnNrsKG4F3RQlxwh78R+zFcj7RV/+8JfGsmFZyXM9fZ7KYpbrzuU/k\r\n         AjneSwkBT8ox4NLEp+3QJNiG4vNx/ktIDVMG8LOJTlFR94vTSwfTplwaG4Huq4ffmOsc\r\n         zlWQ==;\r\n        dara=google.com",
-            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com;\r\n       dkim=pass header.i=@isb-nu-edu-pk.20230601.gappssmtp.com header.s=20230601 header.b=bNBYRgqN;\r\n       spf=none (google.com: i240760@isb.nu.edu.pk does not designate permitted sender hosts) smtp.mailfrom=i240760@isb.nu.edu.pk;\r\n       dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=QUARANTINE) header.from=nu.edu.pk;\r\n       dara=pass header.i=@gmail.com",
-            "return-path": "Return-Path: <i240760@isb.nu.edu.pk>",
-            "received-spf": "Received-SPF: none (google.com: i240760@isb.nu.edu.pk does not designate permitted sender hosts) client-ip=209.85.220.41;",
-            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@isb-nu-edu-pk.20230601.gappssmtp.com header.s=20230601 header.b=bNBYRgqN;\r\n       spf=none (google.com: i240760@isb.nu.edu.pk does not designate permitted sender hosts) smtp.mailfrom=i240760@isb.nu.edu.pk;\r\n       dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=QUARANTINE) header.from=nu.edu.pk;\r\n       dara=pass header.i=@gmail.com",
-            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=isb-nu-edu-pk.20230601.gappssmtp.com; s=20230601; t=1751622366; x=1752227166; dara=google.com;\r\n        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject\r\n         :date:message-id:reply-to;\r\n        bh=eNmQ0a0+qG1DMP8AdwbRxvoF1LgUbEvsIafp8J05a2s=;\r\n        b=bNBYRgqN2hH3Sw+v80jVddlcp/v+Cjna65C+S0z9GtMviOrfulJhz3c+HPWX+DTI9O\r\n         I/K8qMkYsXvkKnYoOUG0T1mtF++XrSW+bPwHGb6bY+A+k1rV5NG+DHuG8XcrDT6tfppk\r\n         DzuhT+wdPOaQGWgy259sObMvrj2AHU5AlCOocWHgnrJmZdehOpVfrJAKTmv4vXszXc/d\r\n         +gJ2MJx+gaKogJ8zbGvnyLMugjDDaNNPZSfMEp56vAHj4dlszAPyIJ5/8VIXhv+iQAj4\r\n         FgsbehdO6XSzGfISvV0G9s+dqGP1sFodWeIWtiqUfDt7dmJ3dF+6TEmTWvXIL5uEmhPH\r\n         CTnA==",
-            "x-google-dkim-signature": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20230601; t=1751622366; x=1752227166;\r\n        h=to:subject:message-id:date:from:mime-version:x-gm-message-state\r\n         :from:to:cc:subject:date:message-id:reply-to;\r\n        bh=eNmQ0a0+qG1DMP8AdwbRxvoF1LgUbEvsIafp8J05a2s=;\r\n        b=ek0Bo7DK+xhBvOfZYDSN0I1Tpo3lImyiGI0fN9SrEmble5PMdVaBwSAqppGsVo8dHX\r\n         ZQ3f7IAxqIjzmFmfPS7KOPDib9FkhrmQ7WQhQ//Z5n1sY5cPCD8fbqIupNcMpz15lj+z\r\n         kGWbiXZLvWK0DWwJD9vv7oUAzfpPBV7QWVZo5kY0XcQjJbejVfLXWzDq1WiwUwCZ6Rt4\r\n         zqZuJxAQfpZRdX8J5xAjONeggBCSEaG1+LAY9y/koXwVgi28yGxIEmgWls6uaEgRiEmg\r\n         3Y5Sy3K+nPKEfLuq4tBWa1vLx8QVULKZvOxFP0nJFy5l3Hf5h6e6eLPYCTfqD26mnOJ7\r\n         WlqQ==",
-            "x-gm-message-state": "X-Gm-Message-State: AOJu0YxPmZax2y4tj/fLfARRkEvb3MKmvo94kJQe/GmOll2VGV12gsUz\r\n\tSK17LTeTrPJTwSWGo8Rf/q4P78jaQfMbCXQY4N5s0+APNdVT1osj8noilwtgft9+ij5udpivoZ2\r\n\tMMZhO4jFfvdp2abaJ7jVEtxMs9IqziZJuSTKA55BPoyUVk3HkZqGqEElj49Zb05haPnTykaOfuR\r\n\tBE95gv8jScijA8/Su27KSYFi2b4d7lodN7YhFUlPWLhGI=",
-            "x-gm-gg": "X-Gm-Gg: ASbGncuMfb3zAQSwdvBDw9zzEldsykUijaTYfi/v/Bu85fY3XTtJ4Eu8S7mcBp4NLxa\r\n\thJhbe7YnE7JoujzI6QasSxLxIkUbO97jLgO9boKfQPpn3tUGh0zqY8ojrkp6b08W5BT764hGt8m\r\n\toIme2NSjO+MFKRVaXr3wiweDdgBYx0S2zMi5ztK/YQ+7uzVvTVYbfr",
-            "x-google-smtp-source": "X-Google-Smtp-Source: AGHT+IHzT8jKWlqhT4cZjCdarxxr5AsgH7h2cSbP/oGlVR6QBVT/TW2RWaEygbzD7XTMcqO3Ji7akfd2iAVup1VH29k=",
-            "mime-version": "MIME-Version: 1.0",
-            "from": "From: Muhammad Abdullah <i240760@isb.nu.edu.pk>",
-            "date": "Date: Fri, 4 Jul 2025 14:45:54 +0500",
-            "x-gm-features": "X-Gm-Features: Ac12FXxLe7DjbIo7smVt4NXJdUAlHyMwonCeXwq7gTpaw1g2lgmTKKHIgKGw8jk",
-            "message-id": "Message-ID: <CAG=wFAifS_8ZD8QDn5unn5u5WDa=tew8vt3gejErkOZSRt0yoQ@mail.gmail.com>",
-            "subject": "Subject: FAQ",
-            "to": "To: abdullahk80808080@gmail.com",
-            "content-type": "Content-Type: multipart/alternative; boundary=\"000000000000e175d70639175c3a\""
-          },
-          "html": "<div dir=\"ltr\"><div>hi there<br>can I please know the refund policies of the store?<br><br></div><div><br></div><span class=\"gmail_signature_prefix\">-- </span><br><div dir=\"ltr\" class=\"gmail_signature\" data-smartmail=\"gmail_signature\"><div dir=\"ltr\">Best Regards,<div><br></div><div>Muhammad Abdullah,</div><div>24i-0760,</div><div>Computer Science Department,<br>National University of Computer and Emerging Sciences</div><div><br></div></div></div></div>\n",
-          "text": "hi there\ncan I please know the refund policies of the store?\n\n\n-- \nBest Regards,\n\nMuhammad Abdullah,\n24i-0760,\nComputer Science Department,\nNational University of Computer and Emerging Sciences\n",
-          "textAsHtml": "<p>hi there<br/>can I please know the refund policies of the store?</p><p>--<br/>Best Regards,</p><p>Muhammad Abdullah,<br/>24i-0760,<br/>Computer Science Department,<br/>National University of Computer and Emerging Sciences</p>",
-          "subject": "FAQ",
-          "date": "2025-07-04T09:45:54.000Z",
-          "to": {
-            "value": [
-              {
-                "address": "abdullahk80808080@gmail.com",
-                "name": ""
-              }
-            ],
-            "html": "<span class=\"mp_address_group\"><a href=\"mailto:abdullahk80808080@gmail.com\" class=\"mp_address_email\">abdullahk80808080@gmail.com</a></span>",
-            "text": "abdullahk80808080@gmail.com"
-          },
-          "from": {
-            "value": [
-              {
-                "address": "i240760@isb.nu.edu.pk",
-                "name": "Muhammad Abdullah"
-              }
-            ],
-            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Muhammad Abdullah</span> &lt;<a href=\"mailto:i240760@isb.nu.edu.pk\" class=\"mp_address_email\">i240760@isb.nu.edu.pk</a>&gt;</span>",
-            "text": "\"Muhammad Abdullah\" <i240760@isb.nu.edu.pk>"
-          },
-          "messageId": "<CAG=wFAifS_8ZD8QDn5unn5u5WDa=tew8vt3gejErkOZSRt0yoQ@mail.gmail.com>"
-        }
-      }
-    ]
-  },
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -351,15 +290,22 @@
       ]
     }
   },
-  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "80764691-1069-4e1f-b645-6ffa013e6313",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "510fe6203072535093bb2ab3dd1e4cf8176cc90da3bee7f259f9edc18a9c8dd7"
-  },
-  "id": "OqbUoTfZp6CNZOHG",
+  "staticData": null,
+  "meta": null,
+  "pinData": null,
+  "versionId": "61259d79-4714-464e-b37a-735b450e1386",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-08-21T21:46:10.412Z",
+      "updatedAt": "2025-08-21T21:46:10.412Z",
+      "role": "workflow:owner",
+      "workflowId": "DNqBzEYtN8Vhu5rl",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
   "tags": []
 }
