@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-17T21:04:21.441Z",
-  "updatedAt": "2025-08-17T21:31:36.000Z",
+  "updatedAt": "2025-08-21T22:08:28.000Z",
   "id": "8dWEdeXw34QBrxOO",
   "name": "n8n-Backup",
   "active": true,
@@ -11,8 +11,7 @@
         "rule": {
           "interval": [
             {
-              "field": "hours",
-              "hoursInterval": 3
+              "triggerAtHour": 22
             }
           ]
         }
@@ -38,8 +37,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        760,
-        140
+        768,
+        144
       ],
       "id": "df520234-70b9-4138-bbb4-19701d17d387",
       "name": "Convert to File"
@@ -71,7 +70,7 @@
       "typeVersion": 1.1,
       "position": [
         1440,
-        180
+        192
       ],
       "id": "0817fa0d-3685-408b-82a4-1dc98255f624",
       "name": "Create a file",
@@ -112,8 +111,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1220,
-        60
+        1232,
+        64
       ],
       "id": "630e9625-325d-42ba-95e0-ba6c48b6c057",
       "name": "Edit a file",
@@ -136,8 +135,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        980,
-        140
+        992,
+        144
       ],
       "id": "7dd6bba3-872c-462e-9db2-761f44bbe28d",
       "name": "Loop Over Items"
@@ -151,7 +150,7 @@
       "type": "n8n-nodes-base.executeCommand",
       "position": [
         320,
-        140
+        144
       ],
       "typeVersion": 1
     },
@@ -163,8 +162,8 @@
       "name": "JSON formatting",
       "type": "n8n-nodes-base.code",
       "position": [
-        540,
-        140
+        544,
+        144
       ],
       "typeVersion": 2
     },
@@ -177,7 +176,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -100,
+        -96,
         0
       ],
       "typeVersion": 1,
@@ -193,8 +192,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1460,
-        20
+        1472,
+        32
       ],
       "typeVersion": 1,
       "id": "97cde5dc-a272-4f50-b0ed-ac8d74284890",
@@ -225,8 +224,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        180,
-        660
+        192,
+        672
       ],
       "id": "1c3f9ea9-f510-4b9c-ad75-a16106a07e28",
       "name": "HTTP Request",
@@ -246,7 +245,7 @@
       "typeVersion": 1,
       "position": [
         400,
-        660
+        672
       ],
       "id": "f0e67f0f-4d79-4f74-82cc-7a4656e70718",
       "name": "Split Out"
@@ -278,8 +277,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        620,
-        660
+        624,
+        672
       ],
       "id": "37c2c529-a086-48e1-8175-abf1b7fceea0",
       "name": "Filter"
@@ -294,7 +293,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         160,
-        520
+        528
       ],
       "typeVersion": 1,
       "id": "f90ec735-8fee-4224-8f81-20f5e15ef216",
@@ -312,8 +311,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        840,
-        660
+        848,
+        672
       ],
       "id": "b50e0e46-f98c-43e6-a14b-ac080bb2ad0b",
       "name": "Convert to File1"
@@ -344,8 +343,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1500,
-        660
+        1504,
+        672
       ],
       "id": "ac39c146-a457-4472-b290-8ac0a6452b98",
       "name": "Create a file1",
@@ -387,7 +386,7 @@
       "typeVersion": 1.1,
       "position": [
         1280,
-        580
+        592
       ],
       "id": "cf0b3979-4e43-4b46-a6d7-8479f1e945fa",
       "name": "Edit a file1",
@@ -410,8 +409,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1060,
-        660
+        1072,
+        672
       ],
       "id": "b5a3ab6e-3d20-4938-a329-58a377382c25",
       "name": "Loop Over Items1"
@@ -425,8 +424,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -100,
-        460
+        -96,
+        464
       ],
       "typeVersion": 1,
       "id": "a7c8f706-1482-4a87-94f4-c00367dcb6a5",
@@ -441,7 +440,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        1460,
+        1472,
         480
       ],
       "typeVersion": 1,
@@ -640,7 +639,16 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "3d4001ea-f9c3-4162-906f-d0714148a046",
+  "versionId": "a6a9f131-66bf-4db9-9787-7c07c36573d2",
   "triggerCount": 1,
+  "shared": [
+    {
+      "createdAt": "2025-08-17T21:04:21.448Z",
+      "updatedAt": "2025-08-17T21:04:21.448Z",
+      "role": "workflow:owner",
+      "workflowId": "8dWEdeXw34QBrxOO",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
   "tags": []
 }
