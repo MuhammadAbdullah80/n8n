@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-19T15:32:07.000Z",
+  "updatedAt": "2025-08-21T23:12:49.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -20,8 +20,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -380,
-        35
+        -384,
+        48
       ],
       "id": "3e4d92b4-b1b4-423c-8955-5c7d3824c858",
       "name": "Schedule Trigger"
@@ -52,7 +52,7 @@
       "typeVersion": 4.2,
       "position": [
         -160,
-        35
+        48
       ],
       "id": "b8f388fe-19e0-470e-b937-874f96bb70c8",
       "name": "HTTP Request",
@@ -71,8 +71,8 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        60,
-        35
+        64,
+        48
       ],
       "id": "debfd5c4-5a1b-4d8f-863e-4f7f2c1a5342",
       "name": "Split Out"
@@ -89,8 +89,8 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        500,
-        35
+        512,
+        48
       ],
       "id": "04846f7e-e20c-4461-a278-1a36e3e3711e",
       "name": "Convert to File"
@@ -113,7 +113,7 @@
           "cachedResultName": "n8n",
           "cachedResultUrl": "https://github.com/MuhammadAbdullah80/n8n"
         },
-        "filePath": "={{ $('Split Out').item.json.name }}.json",
+        "filePath": "={{ $('Filter').item.json.name }}.json",
         "binaryData": true,
         "binaryPropertyName": "=data",
         "commitMessage": "none"
@@ -121,13 +121,13 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1160,
-        35
+        1216,
+        128
       ],
       "id": "1a54eb0d-248d-4efc-afce-3b51e74fe90c",
       "name": "Create a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": true,
+      "alwaysOutputData": false,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
@@ -163,13 +163,13 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        940,
-        -40
+        976,
+        16
       ],
       "id": "58bbc683-1eb3-49cd-a9e7-554270efc982",
       "name": "Edit a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": true,
+      "alwaysOutputData": false,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
@@ -187,8 +187,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        720,
-        35
+        736,
+        -80
       ],
       "id": "d582b937-73cf-4954-bbc6-8bfa835076e3",
       "name": "Loop Over Items"
@@ -220,8 +220,8 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        280,
-        35
+        288,
+        48
       ],
       "id": "954d0b96-2619-4092-b21c-4da9096edd8b",
       "name": "Filter"
@@ -235,7 +235,7 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -440,
+        -448,
         -160
       ],
       "typeVersion": 1,
@@ -251,8 +251,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -180,
-        -100
+        -176,
+        -96
       ],
       "typeVersion": 1,
       "id": "2de0e07f-8fb1-4d92-a624-f097fcbcc006",
@@ -268,7 +268,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         1120,
-        -140
+        -144
       ],
       "typeVersion": 1,
       "id": "ccfd9263-ee40-48a6-bfc8-5302a0ad3016",
@@ -322,7 +322,13 @@
     },
     "Edit a file": {
       "main": [
-        [],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Create a file",
@@ -337,16 +343,6 @@
         [],
         [
           {
-            "node": "Create a file",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Edit a file",
             "type": "main",
             "index": 0
@@ -359,6 +355,24 @@
         [
           {
             "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -380,7 +394,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "297f0827-4170-430f-a841-8f6de1ef233c",
+  "versionId": "2020a0e7-0087-428a-9fcb-d31820b81184",
   "triggerCount": 1,
   "shared": [
     {
