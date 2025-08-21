@@ -1,0 +1,583 @@
+{
+  "createdAt": "2025-08-20T16:01:10.805Z",
+  "updatedAt": "2025-08-21T18:20:19.000Z",
+  "id": "Y8V7dA04X7pxwLfg",
+  "name": "Class 4-HomeTask 1",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6bf1dd658a93.ngrok-free.app/workflow/Y8V7dA04X7pxwLfg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -432
+      ],
+      "id": "ca712b7b-893b-4bc3-bc14-cef5cc431fed",
+      "name": "Webhook",
+      "webhookId": "e5dba0c0-d3fe-48df-bb80-8d98ad6abe9a"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.body }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "Name",
+              "description": "name of teh customer",
+              "required": true
+            },
+            {
+              "name": "Email Address",
+              "description": "email of the customer",
+              "required": true
+            },
+            {
+              "name": "Product",
+              "description": "name of teh product",
+              "required": true
+            },
+            {
+              "name": "Quantity",
+              "type": "number",
+              "description": "Quantity of the product",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "You are an expert extraction algorithm.\nOnly extract relevant information from the text.\nIf you do not know the value of an attribute asked to extract, you may make up a dummy value."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        -480
+      ],
+      "id": "9d50273e-db62-4496-9054-b27354c82213",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appbLwee0dGQ2SJz5",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblO3IiJM1Gw73Wos",
+          "mode": "list",
+          "cachedResultName": "Orders",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5/tblO3IiJM1Gw73Wos"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Quantity": "={{ $json.output.Quantity }}",
+            "Name": "={{ $json.output.Name }}",
+            "Email": "={{ $json.output['Email Address'] }}",
+            "Product": "={{ $json.output.Product }}",
+            "Status": "Pending",
+            "Order Date": "={{ $today }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Order number",
+              "displayName": "Order number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Product",
+              "displayName": "Product",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Processed",
+                  "value": "Processed"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Order Date",
+              "displayName": "Order Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "typecast": true
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        592,
+        -368
+      ],
+      "id": "e7b6efa9-62ae-4885-8ce8-f42a2708f19b",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "NwzP4LTFYojbLbOG",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1296,
+        -144
+      ],
+      "id": "a8a99ec4-cbff-4f37-9185-4f065bfb05f4",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Information Extractor').item.json.output['Email Address'] }}",
+        "subject": "={{ $json.output.Subject }}",
+        "emailType": "text",
+        "message": "={{ $json.output['Email Body'] }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1968,
+        -640
+      ],
+      "id": "767c714c-29a1-48de-9fa4-f01e8f9cd154",
+      "name": "Send a message",
+      "webhookId": "18d3f2c7-32d3-450b-b87e-7604b3572f16",
+      "alwaysOutputData": false,
+      "executeOnce": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Information Extractor').item.json.output }}",
+        "options": {
+          "systemMessage": "You are an AI email assistant for an order processing system. \nYour task is to generate polite and professional confirmation emails \nwhenever a new order is received.\n\nGuidelines:\n- Address the customer by their name.\n- Mention the product name and quantity they ordered.\n- Thank them for their order.\n- Confirm that their order has been received and is being processed.\n- Keep the tone friendly, professional, and concise.\n- Do not add extra marketing or unrelated content.\n- End with a polite closing line and the company/team name.\n\nInput fields you will receive:\n- name (customer name)\n- email (customer email address)\n- product (product name)\n- quantity (number of items)\n\nOutput:\n- Subject line for the email\n- Body text for the email\n\nAlways outpu t a ready to send email\n\nadn end at \nBest Regards,\nTTC"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        -480
+      ],
+      "id": "e27b33e8-5e5b-421a-bc92-897cf2bea82c",
+      "name": "Email",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.output }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "Subject",
+              "description": "the subject of the email",
+              "required": true
+            },
+            {
+              "name": "Email Body",
+              "description": "the actual body of the Email",
+              "required": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        1376,
+        -432
+      ],
+      "id": "1ca12234-607e-4448-a4ce-d8aecccc67e7",
+      "name": "Information Extractor1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appbLwee0dGQ2SJz5",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblO3IiJM1Gw73Wos",
+          "mode": "list",
+          "cachedResultName": "Orders",
+          "cachedResultUrl": "https://airtable.com/appbLwee0dGQ2SJz5/tblO3IiJM1Gw73Wos"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Processed",
+            "Name": "={{ $('Information Extractor').item.json.output.Name }}",
+            "Email": "={{ $('Information Extractor').item.json.output['Email Address'] }}",
+            "Quantity": "={{ $('Information Extractor').item.json.output.Quantity }}",
+            "Product": "={{ $('Information Extractor').item.json.output.Product }}"
+          },
+          "matchingColumns": [
+            "Name",
+            "Email",
+            "Product",
+            "Quantity"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Product",
+              "displayName": "Product",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pending",
+                  "value": "Pending"
+                },
+                {
+                  "name": "Processed",
+                  "value": "Processed"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Order Date",
+              "displayName": "Order Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        2160,
+        -432
+      ],
+      "id": "1cd99188-faf0-4576-b27a-01f1b1fce046",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "NwzP4LTFYojbLbOG",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        -592
+      ],
+      "id": "a987bc9e-2dde-4a80-a20b-5129dc6a6573",
+      "name": "Merge",
+      "executeOnce": true
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Email",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Information Extractor1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    },
+    "node:Airtable Trigger": {
+      "lastTimeChecked": "2025-08-15T17:59:31Z"
+    }
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "f2337f8c-8ff5-40bf-8510-4b0339b97cab",
+  "triggerCount": 1,
+  "shared": [
+    {
+      "createdAt": "2025-08-20T16:01:10.816Z",
+      "updatedAt": "2025-08-20T16:01:10.816Z",
+      "role": "workflow:owner",
+      "workflowId": "Y8V7dA04X7pxwLfg",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
+  "tags": []
+}
