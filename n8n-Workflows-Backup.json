@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-17T21:12:03.000Z",
+  "updatedAt": "2025-08-19T15:32:07.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -382,5 +382,14 @@
   "pinData": {},
   "versionId": "297f0827-4170-430f-a841-8f6de1ef233c",
   "triggerCount": 1,
+  "shared": [
+    {
+      "createdAt": "2025-08-04T18:49:30.951Z",
+      "updatedAt": "2025-08-04T18:49:30.951Z",
+      "role": "workflow:owner",
+      "workflowId": "5WVl1nG35VZQEWVd",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
   "tags": []
 }
