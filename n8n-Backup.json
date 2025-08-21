@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-17T21:04:21.441Z",
-  "updatedAt": "2025-08-21T22:08:28.000Z",
+  "updatedAt": "2025-08-21T22:09:52.000Z",
   "id": "8dWEdeXw34QBrxOO",
   "name": "n8n-Backup",
   "active": true,
@@ -639,7 +639,7 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "a6a9f131-66bf-4db9-9787-7c07c36573d2",
+  "versionId": "7cd0fdba-6a56-4a42-b1e9-e8a8f903cbfa",
   "triggerCount": 1,
   "shared": [
     {
