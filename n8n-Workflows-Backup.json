@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-21T23:12:49.000Z",
+  "updatedAt": "2025-08-21T23:15:22.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -121,7 +121,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1216,
+        1424,
         128
       ],
       "id": "1a54eb0d-248d-4efc-afce-3b51e74fe90c",
@@ -273,6 +273,17 @@
       "typeVersion": 1,
       "id": "ccfd9263-ee40-48a6-bfc8-5302a0ad3016",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1296,
+        -48
+      ],
+      "id": "91353409-ac7b-4473-b782-b49e293a3783",
+      "name": "Merge"
     }
   ],
   "connections": {
@@ -331,7 +342,7 @@
         ],
         [
           {
-            "node": "Create a file",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -346,6 +357,11 @@
             "node": "Edit a file",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
@@ -378,6 +394,17 @@
           }
         ]
       ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -394,7 +421,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "2020a0e7-0087-428a-9fcb-d31820b81184",
+  "versionId": "daca18ab-d78a-4e7a-8050-02e03e2abdd8",
   "triggerCount": 1,
   "shared": [
     {
