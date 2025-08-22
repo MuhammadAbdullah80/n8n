@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-22T16:03:59.000Z",
+  "updatedAt": "2025-08-22T16:44:58.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -21,7 +21,7 @@
       "typeVersion": 1.2,
       "position": [
         -384,
-        48
+        112
       ],
       "id": "3e4d92b4-b1b4-423c-8955-5c7d3824c858",
       "name": "Schedule Trigger"
@@ -52,7 +52,7 @@
       "typeVersion": 4.2,
       "position": [
         -160,
-        48
+        112
       ],
       "id": "b8f388fe-19e0-470e-b937-874f96bb70c8",
       "name": "HTTP Request",
@@ -72,7 +72,7 @@
       "typeVersion": 1,
       "position": [
         64,
-        48
+        112
       ],
       "id": "debfd5c4-5a1b-4d8f-863e-4f7f2c1a5342",
       "name": "Split Out"
@@ -90,7 +90,7 @@
       "typeVersion": 1.1,
       "position": [
         512,
-        48
+        112
       ],
       "id": "04846f7e-e20c-4461-a278-1a36e3e3711e",
       "name": "Convert to File"
@@ -113,15 +113,15 @@
           "cachedResultName": "n8n",
           "cachedResultUrl": "https://github.com/MuhammadAbdullah80/n8n"
         },
-        "filePath": "=",
-        "binaryData": true,
+        "filePath": "={{ $('Split Out').item.json.name }}.json",
+        "fileContent": "data",
         "commitMessage": "none"
       },
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1584,
-        176
+        976,
+        224
       ],
       "id": "1a54eb0d-248d-4efc-afce-3b51e74fe90c",
       "name": "Create a file",
@@ -132,7 +132,8 @@
           "id": "eXKpJZ0zf7n6h0fl",
           "name": "GitHub account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -161,8 +162,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1072,
-        16
+        960,
+        -80
       ],
       "id": "58bbc683-1eb3-49cd-a9e7-554270efc982",
       "name": "Edit a file",
@@ -174,7 +175,7 @@
           "name": "GitHub account"
         }
       },
-      "onError": "continueErrorOutput"
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -186,7 +187,7 @@
       "typeVersion": 3,
       "position": [
         736,
-        -80
+        128
       ],
       "id": "d582b937-73cf-4954-bbc6-8bfa835076e3",
       "name": "Loop Over Items"
@@ -219,7 +220,7 @@
       "typeVersion": 2.2,
       "position": [
         288,
-        48
+        112
       ],
       "id": "954d0b96-2619-4092-b21c-4da9096edd8b",
       "name": "Filter"
@@ -233,8 +234,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -448,
-        -160
+        -604,
+        -228
       ],
       "typeVersion": 1,
       "id": "eb4a7b98-7037-4117-a82a-80ff91c77c40",
@@ -271,17 +272,6 @@
       "typeVersion": 1,
       "id": "ccfd9263-ee40-48a6-bfc8-5302a0ad3016",
       "name": "Sticky Note2"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        1328,
-        112
-      ],
-      "id": "12c23565-5a93-4920-8a41-404f6e0dfa85",
-      "name": "Merge"
     }
   ],
   "connections": {
@@ -325,11 +315,6 @@
             "node": "Loop Over Items",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
           }
         ]
       ]
@@ -343,13 +328,7 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Loop Over Items": {
@@ -358,6 +337,11 @@
         [
           {
             "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create a file",
             "type": "main",
             "index": 0
           }
@@ -377,25 +361,8 @@
     },
     "Create a file": {
       "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ],
+        [],
         []
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Create a file",
-            "type": "main",
-            "index": 0
-          }
-        ]
       ]
     }
   },
@@ -413,7 +380,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1fd984bd-6481-40ad-91c0-f469c66b6cdd",
+  "versionId": "a762ca6d-c7e6-47ba-8996-4ceb703c7b1c",
   "triggerCount": 1,
   "shared": [
     {
