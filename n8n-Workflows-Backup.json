@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-21T23:29:29.000Z",
+  "updatedAt": "2025-08-22T16:03:59.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -120,7 +120,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        1376,
+        1584,
         176
       ],
       "id": "1a54eb0d-248d-4efc-afce-3b51e74fe90c",
@@ -273,171 +273,15 @@
       "name": "Sticky Note2"
     },
     {
-      "parameters": {
-        "url": "http://localhost:5678/api/v1/workflows",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {}
-          ]
-        },
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "accept",
-              "value": "application/json"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
       "position": [
-        -848,
-        528
+        1328,
+        112
       ],
-      "id": "5967e833-eb13-44e3-a96b-3dc184ad542f",
-      "name": "HTTP Request1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "T0kLlqRUrEV01ypE",
-          "name": "n8n API"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fieldToSplitOut": "data",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitOut",
-      "typeVersion": 1,
-      "position": [
-        -560,
-        528
-      ],
-      "id": "264269fc-8ffa-460a-aa73-6308195a70ec",
-      "name": "Split Out1"
-    },
-    {
-      "parameters": {
-        "operation": "toJson",
-        "mode": "each",
-        "options": {
-          "format": true,
-          "fileName": "={{ $json.name }}"
-        }
-      },
-      "type": "n8n-nodes-base.convertToFile",
-      "typeVersion": 1.1,
-      "position": [
-        -256,
-        528
-      ],
-      "id": "a8aaed79-8d03-4a06-8fc6-a1735b97cdd0",
-      "name": "Convert to File1"
-    },
-    {
-      "parameters": {
-        "options": {
-          "reset": false
-        }
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        32,
-        528
-      ],
-      "id": "47822ae6-2df1-41bb-8a6f-99aa4778e34c",
-      "name": "Loop Over Items1"
-    },
-    {
-      "parameters": {
-        "authentication": "oAuth2",
-        "resource": "file",
-        "owner": {
-          "__rl": true,
-          "value": "MuhammadAbdullah80",
-          "mode": "list",
-          "cachedResultName": "MuhammadAbdullah80",
-          "cachedResultUrl": "https://github.com/MuhammadAbdullah80"
-        },
-        "repository": {
-          "__rl": true,
-          "value": "n8n-backup",
-          "mode": "list",
-          "cachedResultName": "n8n-backup",
-          "cachedResultUrl": "https://github.com/MuhammadAbdullah80/n8n-backup"
-        },
-        "filePath": "={{ $('Split Out').item.json.name }}.json",
-        "binaryData": true,
-        "binaryPropertyName": "=data",
-        "commitMessage": "none"
-      },
-      "type": "n8n-nodes-base.github",
-      "typeVersion": 1.1,
-      "position": [
-        480,
-        480
-      ],
-      "id": "f47dfc01-7680-4be1-83aa-97ae8bcc180c",
-      "name": "Create a file2",
-      "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": false,
-      "credentials": {
-        "githubOAuth2Api": {
-          "id": "eXKpJZ0zf7n6h0fl",
-          "name": "GitHub account"
-        }
-      },
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "authentication": "oAuth2",
-        "resource": "file",
-        "operation": "edit",
-        "owner": {
-          "__rl": true,
-          "value": "MuhammadAbdullah80",
-          "mode": "list",
-          "cachedResultName": "MuhammadAbdullah80",
-          "cachedResultUrl": "https://github.com/MuhammadAbdullah80"
-        },
-        "repository": {
-          "__rl": true,
-          "value": "n8n-backup",
-          "mode": "list",
-          "cachedResultName": "n8n-backup",
-          "cachedResultUrl": "https://github.com/MuhammadAbdullah80/n8n-backup"
-        },
-        "filePath": "={{ $('Split Out').item.json.name }}.json",
-        "binaryData": true,
-        "binaryPropertyName": "=data",
-        "commitMessage": "none"
-      },
-      "type": "n8n-nodes-base.github",
-      "typeVersion": 1.1,
-      "position": [
-        720,
-        688
-      ],
-      "id": "7903b56f-c1d7-416c-88b5-501cfa4f9337",
-      "name": "Edit a file1",
-      "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": false,
-      "credentials": {
-        "githubOAuth2Api": {
-          "id": "eXKpJZ0zf7n6h0fl",
-          "name": "GitHub account"
-        }
-      },
-      "onError": "continueErrorOutput"
+      "id": "12c23565-5a93-4920-8a41-404f6e0dfa85",
+      "name": "Merge"
     }
   ],
   "connections": {
@@ -478,9 +322,14 @@
       "main": [
         [
           {
-            "node": "Loop Over Items1",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
@@ -496,7 +345,7 @@
         ],
         [
           {
-            "node": "Create a file",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -538,61 +387,11 @@
         []
       ]
     },
-    "HTTP Request1": {
+    "Merge": {
       "main": [
         [
           {
-            "node": "Split Out1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split Out1": {
-      "main": [
-        [
-          {
-            "node": "Convert to File1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Convert to File1": {
-      "main": [
-        []
-      ]
-    },
-    "Loop Over Items1": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Edit a file1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Loop Over Items1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Create a file2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create a file2": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Edit a file1",
+            "node": "Create a file",
             "type": "main",
             "index": 0
           }
@@ -614,7 +413,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "a9aa0e6e-287a-40b7-8d42-85aa076b6397",
+  "versionId": "1fd984bd-6481-40ad-91c0-f469c66b6cdd",
   "triggerCount": 1,
   "shared": [
     {
