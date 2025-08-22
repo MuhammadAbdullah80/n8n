@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-22T17:21:19.000Z",
+  "updatedAt": "2025-08-22T17:29:10.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -20,10 +20,10 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        -384,
-        16
+        -1104,
+        384
       ],
-      "id": "3e4d92b4-b1b4-423c-8955-5c7d3824c858",
+      "id": "57e1edb8-188b-4ca1-a3f8-0ed801d34c2e",
       "name": "Schedule Trigger"
     },
     {
@@ -51,10 +51,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -160,
-        16
+        -880,
+        384
       ],
-      "id": "b8f388fe-19e0-470e-b937-874f96bb70c8",
+      "id": "b802b6a0-d90e-46ec-b9f2-455e8a691ba3",
       "name": "HTTP Request",
       "credentials": {
         "httpHeaderAuth": {
@@ -71,10 +71,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        64,
-        16
+        -656,
+        384
       ],
-      "id": "debfd5c4-5a1b-4d8f-863e-4f7f2c1a5342",
+      "id": "fc9f793a-bee3-4227-b8a5-c157660a3fe9",
       "name": "Split Out"
     },
     {
@@ -89,10 +89,10 @@
       "type": "n8n-nodes-base.convertToFile",
       "typeVersion": 1.1,
       "position": [
-        512,
-        16
+        -224,
+        384
       ],
-      "id": "04846f7e-e20c-4461-a278-1a36e3e3711e",
+      "id": "97289517-0d03-4b06-9ec8-f89615fe1af6",
       "name": "Convert to File"
     },
     {
@@ -113,27 +113,28 @@
           "cachedResultName": "n8n",
           "cachedResultUrl": "https://github.com/MuhammadAbdullah80/n8n"
         },
-        "filePath": "={{ $('Filter').item.json.name }}.json",
-        "fileContent": "data",
+        "filePath": "={{ $('Split Out').item.json.name }}.json",
+        "binaryData": true,
+        "binaryPropertyName": "=data",
         "commitMessage": "none"
       },
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        768,
-        -144
+        448,
+        384
       ],
-      "id": "1a54eb0d-248d-4efc-afce-3b51e74fe90c",
+      "id": "4b34e5ba-6d2d-4d6b-a6f4-2418e181beb4",
       "name": "Create a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": false,
+      "alwaysOutputData": true,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
           "name": "GitHub account"
         }
       },
-      "onError": "continueRegularOutput"
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -162,20 +163,35 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        768,
-        48
+        224,
+        304
       ],
-      "id": "58bbc683-1eb3-49cd-a9e7-554270efc982",
+      "id": "dc784726-d2b8-4e90-93a5-61ac342a3ba0",
       "name": "Edit a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": false,
+      "alwaysOutputData": true,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
           "name": "GitHub account"
         }
       },
-      "onError": "continueRegularOutput"
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        16,
+        384
+      ],
+      "id": "7b6a716c-63ec-428f-b88d-059a9476dfe4",
+      "name": "Loop Over Items"
     },
     {
       "parameters": {
@@ -204,10 +220,10 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        288,
-        16
+        -432,
+        384
       ],
-      "id": "954d0b96-2619-4092-b21c-4da9096edd8b",
+      "id": "9539dbb5-a27c-493f-801f-236cd72cccc4",
       "name": "Filter"
     },
     {
@@ -219,11 +235,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -608,
-        -224
+        -1152,
+        176
       ],
       "typeVersion": 1,
-      "id": "eb4a7b98-7037-4117-a82a-80ff91c77c40",
+      "id": "00fbfe2b-a377-4f98-88a5-41a78d99a674",
       "name": "Sticky Note"
     },
     {
@@ -235,11 +251,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        -96
+        -896,
+        240
       ],
       "typeVersion": 1,
-      "id": "2de0e07f-8fb1-4d92-a624-f097fcbcc006",
+      "id": "f55f2cbf-6fbb-4bdf-bf0a-41cfb1be3a31",
       "name": "Sticky Note1"
     },
     {
@@ -251,11 +267,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        928,
-        -208
+        416,
+        208
       ],
       "typeVersion": 1,
-      "id": "ccfd9263-ee40-48a6-bfc8-5302a0ad3016",
+      "id": "50d04c37-46a7-4812-bf9a-d2b787104bec",
       "name": "Sticky Note2"
     }
   ],
@@ -297,7 +313,7 @@
       "main": [
         [
           {
-            "node": "Edit a file",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -307,7 +323,35 @@
     "Edit a file": {
       "main": [
         [],
-        []
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Filter": {
@@ -319,12 +363,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Create a file": {
-      "main": [
-        [],
-        []
       ]
     }
   },
@@ -342,7 +380,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "11a5ddc6-6644-4b98-b31a-2b6217f1e670",
+  "versionId": "2d070326-cb2d-4924-bd23-cf438e77b009",
   "triggerCount": 1,
   "shared": [
     {
