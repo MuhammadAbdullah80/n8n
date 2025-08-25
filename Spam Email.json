@@ -1,0 +1,522 @@
+{
+  "createdAt": "2025-08-25T18:52:27.544Z",
+  "updatedAt": "2025-08-25T19:17:49.000Z",
+  "id": "m28aJWx2vHkxaPij",
+  "name": "Spam Email",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "da90932d-a7fd-4272-baa5-8b574a690369",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk",
+          "mode": "list",
+          "cachedResultName": "Spam Emails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Pending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "62caccf1-42fe-4089-9413-a0d81ac00e6c",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "=wfhuiwhfwf@ofo.com",
+        "subject": "Exciting Update from XYZ Company",
+        "emailType": "text",
+        "message": "Dear Business,  We hope this message finds you well. At XYZ Company, we’re always striving to bring more value to our customers. We’re thrilled to announce the launch of our new customer portal, designed to make your experience faster, easier, and more personalized.  With this update, you’ll be able to:  Track your orders in real-time  Access exclusive discounts  Get 24/7 customer support  To explore the new portal, simply log in with your existing account details at www.xyzcompany.com .  Thank you for being a valued part of the XYZ community. We look forward to continuing this journey with you.  Warm regards, John Smith Customer Success Manager XYZ Company",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "34a99842-f63c-44db-886c-073ee1f165b3",
+      "name": "Send a message",
+      "webhookId": "1ac3cbde-9421-42de-b3af-9357b522b99c",
+      "executeOnce": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        328
+      ],
+      "id": "3abfc998-0ac1-4193-b3bd-56ccdf26a8cd",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk",
+          "mode": "list",
+          "cachedResultName": "Spam Emails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            " Emails": "={{ $('Information Extractor').item.json.output.Email }}",
+            "Valid": "={{ $json.output }}"
+          },
+          "matchingColumns": [
+            " Emails"
+          ],
+          "schema": [
+            {
+              "id": " Emails",
+              "displayName": " Emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Valid",
+              "displayName": "Valid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        928,
+        328
+      ],
+      "id": "717c905a-140d-4ed0-949f-d97c3bf96786",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Email recieved was: {{ $('Gmail Trigger').item.json.snippet }}\nyour Output has to be only \"Yes\" or \"no\" and nothing else.\n\nif the email recieved is something about a wrong email address or that the email was not found or any type of error with tthe actual email adress then output \"No\" else output \"Yes\"!",
+        "options": {
+          "systemMessage": "you output has to be \"Yes\" or \"No\"!"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        328
+      ],
+      "id": "48af553e-c3ca-4dd6-bf34-7a0153d3418c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.snippet }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "Email",
+              "description": "the email this email was intented to be sent"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        328
+      ],
+      "id": "a740a13d-3327-41c3-968e-1bc35d898217",
+      "name": "Information Extractor"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        296,
+        552
+      ],
+      "id": "f318b46c-72b5-481b-85f6-d333018b5cfc",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk",
+          "mode": "list",
+          "cachedResultName": "Spam Emails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_2VHSX6UTP6ByFiPAVaL-dQrR808CEf05CIE0WK0_pk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            " Emails": "={{ $('Get row(s) in sheet').item.json[' Emails'] }}",
+            "Valid": "=",
+            "Status": "Done"
+          },
+          "matchingColumns": [
+            " Emails"
+          ],
+          "schema": [
+            {
+              "id": " Emails",
+              "displayName": " Emails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Valid",
+              "displayName": "Valid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        0
+      ],
+      "id": "8f6a4d89-f514-4688-ab5e-f7330d27fa8c",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Sending",
+        "height": 256,
+        "width": 992,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "2ed0a668-eea2-4415-83cf-1fe67eb9dfc0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Recieving",
+        "height": 448,
+        "width": 1296,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "fe996275-9058-490e-ac56-ab1c01ed001a",
+      "name": "Sticky Note1"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "198e2a31f1da0bcc",
+          "threadId": "198e2a3117a7f7dd",
+          "snippet": "Address not found Your message wasn&#39;t delivered to wfhuiwhfwf@ofo.com because the address couldn&#39;t be found or is unable to receive email. The response from the remote server was: 551 5.1.1",
+          "payload": {
+            "mimeType": "multipart/report"
+          },
+          "sizeEstimate": 14028,
+          "historyId": "1791316",
+          "internalDate": "1756148997000",
+          "labels": [
+            {
+              "id": "INBOX",
+              "name": "INBOX"
+            },
+            {
+              "id": "IMPORTANT",
+              "name": "IMPORTANT"
+            },
+            {
+              "id": "CATEGORY_UPDATES",
+              "name": "CATEGORY_UPDATES"
+            },
+            {
+              "id": "UNREAD",
+              "name": "UNREAD"
+            }
+          ],
+          "To": "abdullahk80808080@gmail.com",
+          "From": "Mail Delivery Subsystem <mailer-daemon@googlemail.com>",
+          "Subject": "Delivery Status Notification (Failure)"
+        }
+      }
+    ]
+  },
+  "versionId": "d698b652-4905-41b6-9e54-35a82b9a2d6d",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-08-25T18:52:27.599Z",
+      "updatedAt": "2025-08-25T18:52:27.599Z",
+      "role": "workflow:owner",
+      "workflowId": "m28aJWx2vHkxaPij",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
+  "tags": []
+}
