@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-04T18:49:30.907Z",
-  "updatedAt": "2025-08-22T17:29:10.000Z",
+  "updatedAt": "2025-08-25T21:02:33.000Z",
   "id": "5WVl1nG35VZQEWVd",
   "name": "n8n-Workflows-Backup",
   "active": false,
@@ -127,7 +127,7 @@
       "id": "4b34e5ba-6d2d-4d6b-a6f4-2418e181beb4",
       "name": "Create a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": true,
+      "alwaysOutputData": false,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
@@ -169,7 +169,7 @@
       "id": "dc784726-d2b8-4e90-93a5-61ac342a3ba0",
       "name": "Edit a file",
       "webhookId": "14f8123c-b9ad-448e-b4c5-c092482534f6",
-      "alwaysOutputData": true,
+      "alwaysOutputData": false,
       "credentials": {
         "githubOAuth2Api": {
           "id": "eXKpJZ0zf7n6h0fl",
@@ -380,7 +380,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "2d070326-cb2d-4924-bd23-cf438e77b009",
+  "versionId": "e7a61fbd-bd8c-4a2c-923e-0458e6fc302e",
   "triggerCount": 1,
   "shared": [
     {
