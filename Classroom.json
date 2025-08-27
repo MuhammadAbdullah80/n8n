@@ -1,0 +1,122 @@
+{
+  "createdAt": "2025-08-27T19:37:55.997Z",
+  "updatedAt": "2025-08-27T20:08:31.000Z",
+  "id": "PFKWuPjJgsMLSJH1",
+  "name": "Classroom",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ce0bcadb-9bcf-4b0f-97f5-c9d615733d31",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://classroom.googleapis.com/v1/courses",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleOAuth2Api",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        -144
+      ],
+      "id": "d87df090-ce9e-47aa-abff-f89fe481438b",
+      "name": "HTTP Request",
+      "credentials": {
+        "googleOAuth2Api": {
+          "id": "SauR7dmQmTSaeKbp",
+          "name": "Google account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "html",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "99ce5091-2d1f-4b71-85aa-54cfc98b04cc",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 200,
+        "filters": {
+          "sender": "no-reply@classroom.google.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -32,
+        -160
+      ],
+      "id": "1ade48aa-2f29-46d2-8cff-3682569c76ef",
+      "name": "Get many messages",
+      "webhookId": "c1fadb69-bee9-4b03-b22a-1e988b41919f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Get many messages": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "6398f3db-c415-4b81-9a05-841e56fa4671",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-08-27T19:37:56.006Z",
+      "updatedAt": "2025-08-27T19:37:56.006Z",
+      "role": "workflow:owner",
+      "workflowId": "PFKWuPjJgsMLSJH1",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
+  "tags": []
+}
