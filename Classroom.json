@@ -1,6 +1,6 @@
 {
   "createdAt": "2025-08-27T19:37:55.997Z",
-  "updatedAt": "2025-08-27T20:08:31.000Z",
+  "updatedAt": "2025-08-27T20:34:03.000Z",
   "id": "PFKWuPjJgsMLSJH1",
   "name": "Classroom",
   "active": false,
@@ -31,8 +31,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        192,
-        -144
+        224,
+        0
       ],
       "id": "d87df090-ce9e-47aa-abff-f89fe481438b",
       "name": "HTTP Request",
@@ -51,8 +51,8 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        624,
-        0
+        336,
+        -256
       ],
       "id": "99ce5091-2d1f-4b71-85aa-54cfc98b04cc",
       "name": "Extract from File"
@@ -80,17 +80,55 @@
           "name": "Gmail account"
         }
       }
+    },
+    {
+      "parameters": {
+        "url": "=https://classroom.googleapis.com/v1/courses/{{ $json.courses[0].id }}/",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleOAuth2Api",
+        "options": {
+          "response": {
+            "response": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        -16
+      ],
+      "id": "c1ee8d19-878f-48f5-81d8-df84168cda72",
+      "name": "HTTP Request1",
+      "credentials": {
+        "googleOAuth2Api": {
+          "id": "SauR7dmQmTSaeKbp",
+          "name": "Google account"
+        }
+      }
     }
   ],
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
-        []
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "HTTP Request": {
       "main": [
-        []
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Get many messages": {
@@ -107,7 +145,7 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "6398f3db-c415-4b81-9a05-841e56fa4671",
+  "versionId": "178a4943-d7f7-4b0a-a506-5291b202aefd",
   "triggerCount": 0,
   "shared": [
     {
