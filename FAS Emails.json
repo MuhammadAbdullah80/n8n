@@ -1,0 +1,475 @@
+{
+  "createdAt": "2025-10-06T20:13:41.569Z",
+  "updatedAt": "2025-10-07T15:49:12.000Z",
+  "id": "UqAtp1DM9FJZKKDo",
+  "name": "FAS Emails",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -176
+      ],
+      "id": "7cc28bb4-8bab-45eb-9492-8a1ff5d12ebf",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1CCZ7XXNJgGaaARiAk2cWT_UIY4wIwwEZc9ofDhDTNg4",
+          "mode": "list",
+          "cachedResultName": "FAS Emails",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CCZ7XXNJgGaaARiAk2cWT_UIY4wIwwEZc9ofDhDTNg4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CCZ7XXNJgGaaARiAk2cWT_UIY4wIwwEZc9ofDhDTNg4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Not Reached"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        -176
+      ],
+      "id": "f317e224-169c-476b-b64a-6f8c6d7b5c1a",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "EhAt2j9QvRbOZG2y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Recient name:  {{ $json.Name }}\n\nComapny Name: {{ $json['Company Name'] }}\n\n\nIf the Recipiient name is not defined then start by : To Whom It May Concern,\n\n\nand only give the email never the header",
+        "options": {
+          "systemMessage": "You are a helpful Email writer:\n\ndraft Email:\nDear [Recipient’s Name], \n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every \nyear, we organize our flagship event, the Adventure Gala – a three-day festival that brings \ntogether 5,000+ students through adventure sports, cultural evenings, and recreational \nactivities. It is one of the most anticipated events on campus, offering brands a vibrant platform \nto connect with youth. \n\nFor this year’s Gala, we are inviting [Company Name] to partner with us as a sponsor. Our \ntailored Gold, Silver, and Bronze packages provide: \n\n● Extensive on-campus branding (stalls, standees, stage presence) \n\n● Digital exposure through reels, shoutouts, and collaborations \n\n● Direct engagement opportunities with students for lead generation and recruitment \n\n● Exclusive event privileges including VIP access \n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event \nthat fosters leadership, inclusivity, and adventure among students. The detailed proposal is \nattached for your review. \n\nWe would be glad to discuss this further and explore a partnership with [Company Name]. \n\nBest regards, \nMuhammad Abdullah\nFAST NUCES ISB\n\n\n\n\n\nIf the Recipiient name is not defined then start by : To Whom It May Concern,"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        -176
+      ],
+      "id": "cb9c8ba3-f9a6-4a3b-aa0f-90ffbaebab27",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        520,
+        48
+      ],
+      "id": "26e39c69-5b3f-4807-993e-18ae062c953c",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EwzqNyt7LZkLmyP7",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get row(s) in sheet').item.json.Email }}",
+        "subject": " Sponsorship Invitation – Adventure Gala 2025 at FAST",
+        "emailType": "text",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1024,
+        -176
+      ],
+      "id": "b2301b25-e324-4576-ada0-6c0f20ae2a2f",
+      "name": "Send a message",
+      "webhookId": "34bedbee-edc4-48b4-bfb8-0be41dcd4aed",
+      "executeOnce": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "DFMTRttXzSv3skXi",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1IEOfYd2shnVZv9oSXxBm_acaN3qwJno7",
+          "mode": "list",
+          "cachedResultName": "FAS Sponsorship Proposal.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1IEOfYd2shnVZv9oSXxBm_acaN3qwJno7/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        800,
+        -176
+      ],
+      "id": "3a5372c6-607e-48e3-b006-975e34a1f3fd",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zEBHYQYeK1k7bCcQ",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Get row(s) in sheet": [
+      {
+        "json": {
+          "row_number": 2,
+          "No.": 14,
+          "Company Name": "Hum News",
+          "Phone": "",
+          "Email": "a.zia@humnetwork.tv",
+          "Status": "Not Reached",
+          "Name": "Ahsan Zia",
+          "col_7": "https://www.bing.com/ck/a?!&&p=f2465bf9b7e6f38f44f927e7235998d395df7762a2fc85e7729ce021c7e8859dJmltdHM9MTc1OTc5NTIwMA&ptn=3&ver=2&hsh=4&fclid=1da31773-e186-6076-1722-016ae0c361fe&psq=hum+news+marketing&u=a1aHR0cHM6Ly9way5saW5rZWRpbi5jb20vaW4vYWhzYW4temlhLTc1Yjk4YjMz",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 3,
+          "No.": 15,
+          "Company Name": "Study in AUS",
+          "Phone": "",
+          "Email": "info@studyin-aus.com",
+          "Status": "Not Reached",
+          "Name": "",
+          "col_7": "",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 4,
+          "No.": 16,
+          "Company Name": "Devsinc",
+          "Phone": "",
+          "Email": "business@devsinc.com",
+          "Status": "Not Reached",
+          "Name": "",
+          "col_7": 518749814,
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 5,
+          "No.": 17,
+          "Company Name": "SiTech",
+          "Phone": "",
+          "Email": "info@sitechpharma.com",
+          "Status": "Not Reached",
+          "Name": "",
+          "col_7": "Tel : +92 21 3454 0760 +92 21 3454 0762",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 7,
+          "No.": 19,
+          "Company Name": "IdeoFuzion",
+          "Phone": "",
+          "Email": "ramsha.sohail@ideofuzion.com",
+          "Status": "Not Reached",
+          "Name": "Ramsha Sohail",
+          "col_7": "(8) Ramsha Sohail | LinkedIn",
+          "col_8": "info@ideofuzion.com",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 8,
+          "No.": 20,
+          "Company Name": "Autosphere ai",
+          "Phone": "",
+          "Email": "saad.khalid@autosphere.ai",
+          "Status": "Not Reached",
+          "Name": "Saad Khalid",
+          "col_7": "Saad Khalid",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 9,
+          "No.": 21,
+          "Company Name": "Manafa",
+          "Phone": "",
+          "Email": "wishaq@manafa.co",
+          "Status": "Not Reached",
+          "Name": "Waqas Ishfaq",
+          "col_7": "https://www.linkedin.com/in/waqas-i-5961853b/",
+          "col_8": "",
+          "col_9": "0092-322-8426416",
+          "col_10": "info@manafa.com",
+          "col_11": "Director Ops"
+        }
+      },
+      {
+        "json": {
+          "row_number": 10,
+          "No.": 22,
+          "Company Name": "Opsrace",
+          "Phone": "",
+          "Email": "info@opsrace.com",
+          "Status": "Not Reached",
+          "Name": "",
+          "col_7": "",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 11,
+          "No.": 23,
+          "Company Name": "Ebryx",
+          "Phone": "",
+          "Email": "ibrar.ahmed@ebryx.com",
+          "Status": "Not Reached",
+          "Name": "Ibrar Ahmed",
+          "col_7": "",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 12,
+          "No.": 24,
+          "Company Name": "Nova",
+          "Phone": "",
+          "Email": "Sales@novamarketing.com.pk",
+          "Status": "Not Reached",
+          "Name": "",
+          "col_7": "",
+          "col_8": "",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 13,
+          "No.": 25,
+          "Company Name": "PSEB",
+          "Phone": "",
+          "Email": "mdanish@pseb.org.pk",
+          "Status": "Not Reached",
+          "Name": "Muhammad Danish",
+          "col_7": "(8) Muhammad Danish | LinkedIn",
+          "col_8": "cmo@pseb.org.pk",
+          "col_9": "",
+          "col_10": "",
+          "col_11": ""
+        }
+      }
+    ],
+    "AI Agent": [
+      {
+        "json": {
+          "output": "Dear Ahsan Zia,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Hum News to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n\n● Digital exposure through reels, shoutouts, and collaborations\n\n● Direct engagement opportunities with students for lead generation and recruitment\n\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Hum News.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "To Whom It May Concern,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Study in AUS to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n\n● Digital exposure through reels, shoutouts, and collaborations\n\n● Direct engagement opportunities with students for lead generation and recruitment\n\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Study in AUS.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "To Whom It May Concern,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Devsinc to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Devsinc.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "To Whom It May Concern,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting SiTech to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with SiTech.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "Dear Ramsha Sohail,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting IdeoFuzion to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with IdeoFuzion.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "Dear Saad Khalid,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Autosphere ai to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Autosphere ai.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "Dear Waqas Ishfaq,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Manafa to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Manafa.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "To Whom It May Concern,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Opsrace to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Opsrace.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "Dear Ibrar Ahmed,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Ebryx to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Ebryx.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "To Whom It May Concern,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting Nova to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with Nova.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      },
+      {
+        "json": {
+          "output": "Dear Muhammad Danish,\n\nI am writing on behalf of the FAST Adventure Society (FAS), FAST NUCES Islamabad. Every year, we organize our flagship event, the Adventure Gala – a three-day festival that brings together 5,000+ students through adventure sports, cultural evenings, and recreational activities. It is one of the most anticipated events on campus, offering brands a vibrant platform to connect with youth.\n\nFor this year’s Gala, we are inviting PSEB to partner with us as a sponsor. Our tailored Gold, Silver, and Bronze packages provide:\n\n● Extensive on-campus branding (stalls, standees, stage presence)\n● Digital exposure through reels, shoutouts, and collaborations\n● Direct engagement opportunities with students for lead generation and recruitment\n● Exclusive event privileges including VIP access\n\nWe believe this collaboration can offer your brand meaningful visibility while supporting an event that fosters leadership, inclusivity, and adventure among students. The detailed proposal is attached for your review.\n\nWe would be glad to discuss this further and explore a partnership with PSEB.\n\nBest regards,\nMuhammad Abdullah\nFAST NUCES ISB"
+        }
+      }
+    ]
+  },
+  "versionId": "67db875d-a7e2-4212-a81f-2907ea143410",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2025-10-06T20:13:41.592Z",
+      "updatedAt": "2025-10-06T20:13:41.592Z",
+      "role": "workflow:owner",
+      "workflowId": "UqAtp1DM9FJZKKDo",
+      "projectId": "CtFhfI3VvFsmPKJX"
+    }
+  ],
+  "tags": []
+}
