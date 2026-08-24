@@ -43,6 +43,26 @@ test('regex reports invalid patterns instead of throwing', () => {
 	assert.match(String(checkRule({ sku: 'x' }, r)), /invalid pattern/);
 });
 
+test('isDate accepts timestamps and rejects bare years', () => {
+	const r = rule({ field: 'due', condition: 'isDate' });
+	assert.equal(checkRule({ due: '2026-08-25' }, r), null);
+	assert.equal(checkRule({ due: '2026-08-25T09:14:02Z' }, r), null);
+	assert.ok(checkRule({ due: '2026' }, r), 'a bare year is a mis-typed field');
+	assert.ok(checkRule({ due: 'not a date' }, r));
+	assert.ok(checkRule({ due: '' }, r));
+});
+
+test('isOneOf compares as strings and reports the allowed set', () => {
+	const r = rule({ field: 'status', condition: 'isOneOf', allowed: ['open', 'closed'] });
+	assert.equal(checkRule({ status: 'open' }, r), null);
+	assert.match(String(checkRule({ status: 'draft' }, r)), /open, closed/);
+});
+
+test('isOneOf with no allowed list is reported, not silently passed', () => {
+	const r = rule({ field: 'status', condition: 'isOneOf' });
+	assert.match(String(checkRule({ status: 'x' }, r)), /no allowed values/);
+});
+
 test('evaluateRules collects every violation', () => {
 	const violations = evaluateRules({ email: 'bad' }, [
 		rule({ condition: 'isEmail' }),

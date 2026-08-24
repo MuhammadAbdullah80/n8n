@@ -6,8 +6,10 @@
 /** One configured validation rule as the node UI produces it. */
 export interface GuardRule {
 	field: string;
-	condition: 'exists' | 'notEmpty' | 'isEmail' | 'isNumber' | 'regex';
+	condition: 'exists' | 'notEmpty' | 'isEmail' | 'isNumber' | 'regex' | 'isDate' | 'isOneOf';
 	pattern?: string;
+	/** Allowed values for `isOneOf`, compared as strings. */
+	allowed?: string[];
 }
 
 /**
@@ -58,6 +60,28 @@ export function checkRule(item: unknown, rule: GuardRule): string | null {
 				Number.isFinite(Number(value))
 				? null
 				: `${rule.field} is not a number`;
+
+		case 'isDate': {
+			// Date.parse accepts a lot, but a bare integer year like 2024 parsing
+			// as a date is nearly always a mis-typed field rather than intent.
+			if (typeof value === 'number' || value === null || value === undefined) {
+				return `${rule.field} is not a date`;
+			}
+			const text = String(value).trim();
+			if (text === '' || /^\d+$/.test(text)) {
+				return `${rule.field} is not a date`;
+			}
+			return Number.isNaN(Date.parse(text)) ? `${rule.field} is not a date` : null;
+		}
+
+		case 'isOneOf': {
+			if (!rule.allowed?.length) {
+				return `${rule.field} has an isOneOf rule with no allowed values`;
+			}
+			return rule.allowed.includes(String(value))
+				? null
+				: `${rule.field} is not one of ${rule.allowed.join(', ')}`;
+		}
 
 		case 'regex': {
 			if (!rule.pattern) return `${rule.field} has a regex rule with no pattern`;
