@@ -1,0 +1,19 @@
+{
+  "name": "n8n-custom-nodes",
+  "version": "0.1.0",
+  "description": "Custom n8n nodes used by the workflows in this repository",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsc -p tsconfig.json && node --test ../dist/"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "n8n-workflow": "*",
+    "typescript": "^5.5.0"
+  },
+  "n8n": {
+    "nodes": ["dist/WorkflowGuard/WorkflowGuard.node.js"]
+  }
+}

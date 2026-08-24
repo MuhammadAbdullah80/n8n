@@ -33,6 +33,11 @@ binding around it.
 ## Development
 
 ```sh
-tsc -p nodes/tsconfig.json     # type-check and build
-node --test dist/              # run the rule tests
+cd nodes
+npm install
+npm run typecheck   # tsc --noEmit
+npm test            # build, then run the rule tests
 ```
+
+The `n8n.nodes` field in `nodes/package.json` points at the built node, which is
+what an n8n instance reads when the package is installed as a community node.
