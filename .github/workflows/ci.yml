@@ -27,4 +27,4 @@ jobs:
       - name: Test rules
         run: npx tsc WorkflowGuard/rules.ts WorkflowGuard/rules.test.ts --target es2022 --module commonjs --esModuleInterop --outDir ../dist-test
       - name: Run tests
-        run: node --test ../dist-test/WorkflowGuard/
+        run: node --test ../dist-test/
