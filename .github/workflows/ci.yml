@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  nodes:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nodes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install
+        run: npm install --no-audit --no-fund
+      - name: Type-check
+        run: npx tsc -p tsconfig.json --noEmit
+      - name: Test rules
+        run: |
+          npx tsc rules.ts rules.test.ts \
+            --target es2022 --module commonjs --esModuleInterop \
+            --outDir ../dist-test
+          node --test ../dist-test/
