@@ -16,16 +16,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      # n8n-workflow drags in isolated-vm, a native module that needs a full
-      # C++ build. Only its type declarations are wanted here, so the install
-      # scripts are skipped rather than spending minutes compiling a VM.
+      # n8n-workflow drags in isolated-vm, a native module needing a full C++
+      # build. Only its type declarations are wanted here, so install scripts
+      # are skipped rather than spending minutes compiling a VM.
       - name: Install (types only)
         run: npm install --ignore-scripts --no-audit --no-fund
       - name: Type-check
         run: npx tsc -p tsconfig.json --noEmit
+      # rules.ts imports nothing from n8n, so it compiles and tests on its own.
       - name: Test rules
-        run: |
-          npx tsc rules.ts rules.test.ts \
-            --target es2022 --module commonjs --esModuleInterop \
-            --outDir ../dist-test
-          node --test ../dist-test/
+        run: npx tsc WorkflowGuard/rules.ts WorkflowGuard/rules.test.ts --target es2022 --module commonjs --esModuleInterop --outDir ../dist-test
+      - name: Run tests
+        run: node --test ../dist-test/WorkflowGuard/
