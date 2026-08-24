@@ -25,6 +25,8 @@ jobs:
         run: npx tsc -p tsconfig.json --noEmit
       # rules.ts imports nothing from n8n, so it compiles and tests on its own.
       - name: Test rules
-        run: npx tsc WorkflowGuard/rules.ts WorkflowGuard/rules.test.ts --target es2022 --module commonjs --esModuleInterop --outDir ../dist-test
+        run: npx tsc WorkflowGuard/rules.ts WorkflowGuard/rules.test.ts --target es2022 --module commonjs --esModuleInterop --outDir dist-test
       - name: Run tests
-        run: node --test ../dist-test/
+        run: |
+          ls -R dist-test
+          node --test dist-test/
