@@ -73,6 +73,15 @@ export class WorkflowGuard implements INodeType {
 				],
 			},
 			{
+				displayName: 'Violation Field',
+				name: 'violationField',
+				type: 'string',
+				default: '__violations',
+				description:
+					'Key the violation list is attached under on routed items. Change it if your payload already uses this name.',
+				displayOptions: { show: { onFailure: ['route'] } },
+			},
+			{
 				displayName: 'On Failure',
 				name: 'onFailure',
 				type: 'options',
@@ -122,8 +131,9 @@ export class WorkflowGuard implements INodeType {
 				);
 			}
 			if (onFailure === 'route') {
+				const violationField = this.getNodeParameter('violationField', i, '__violations') as string;
 				failed.push({
-					json: { ...items[i].json, __violations: violations },
+					json: { ...items[i].json, [violationField]: violations },
 					pairedItem: { item: i },
 				});
 			}
